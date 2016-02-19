@@ -31,6 +31,11 @@ MESSAGE( STATUS "OpenCL_INCPATH=" ${OpenCL_INCPATH})
 MESSAGE( STATUS "OpenCL_LIBPATH=" ${OpenCL_LIBPATH})
 
 ###############################
+# add glfw
+###############################
+##add_subdirectory(src/3rdparty/glfw-3.1.2/)
+
+###############################
 # Find OpenCL
 ###############################
 find_package(OpenCL REQUIRED)
@@ -41,6 +46,28 @@ if(NOT OPENCL_FOUND)
 	message(ERROR " OPENCL not found!")
 endif(NOT OPENCL_FOUND)
 
+
+#########################################################
+# FIND GLUT
+#########################################################
+find_package(GLUT REQUIRED)
+include_directories(${GLUT_INCLUDE_DIRS})
+link_directories(${GLUT_LIBRARY_DIRS})
+add_definitions(${GLUT_DEFINITIONS})
+if(NOT GLUT_FOUND)
+    message(ERROR " GLUT not found!")
+endif(NOT GLUT_FOUND)
+
+#########################################################
+# FIND OPENGL
+#########################################################
+find_package(OpenGL REQUIRED)
+include_directories(${OpenGL_INCLUDE_DIRS})
+link_directories(${OpenGL_LIBRARY_DIRS})
+add_definitions(${OpenGL_DEFINITIONS})
+if(NOT OPENGL_FOUND)
+    message(ERROR " OPENGL not found!")
+endif(NOT OPENGL_FOUND)
 
 ###############################
 # Other include paths
@@ -82,5 +109,6 @@ endif()
 ###############################
 # Linking
 ###############################
+message(INFO "glut---- ${GLUT_LIBRARY}")
 add_executable(raytracer_host.exe ${SRC})
-target_link_libraries(raytracer_host.exe ${OPENCL_LIBRARIES} )
+target_link_libraries(raytracer_host.exe ${OPENCL_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
