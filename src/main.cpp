@@ -15,6 +15,8 @@ using namespace std;
 using namespace sda;
 using namespace sda::utils;
 
+GLuint g_checkerboard = 0;
+
 void draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
@@ -24,27 +26,52 @@ void draw() {
 	float vertices [4][3] = { {-1.0, -1.0, 0.0}, {1.0, -1.0, 0.0},
 						  {1.0, 1.0, 0.0}, {-1.0, 1.0, 0.0} };
 
-	float texcoords [4][2] = { {0.0, 0.0}, {0.0, 1.0},
-						  {1.0, 1.0}, {1.0, 0.0} };
+	float texcoords [4][2] = { {0.0, 0.0}, {1.0, 0.0},
+						  {1.0, 1.0}, {0.0, 1.0} };
+
+	if(g_checkerboard) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, g_checkerboard);
+	}
 
 
+	glPushMatrix();
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glColor3f(1.0f,0,0);
-	glBegin(GL_TRIANGLE_FAN);
-		glVertex3fv(&vertices[0][0]);
+	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+	glBegin(GL_QUADS);
 		glTexCoord2fv(&texcoords[0][0]);
+		glVertex3fv(&vertices[0][0]);
 
-		glVertex3fv(&vertices[1][0]);
+
 		glTexCoord2fv(&texcoords[1][0]);
+		glVertex3fv(&vertices[1][0]);
 
+
+		glTexCoord2fv(&texcoords[2][0]);
+		glVertex3fv(&vertices[2][0]);
+
+
+		glTexCoord2fv(&texcoords[3][0]);
+		glVertex3fv(&vertices[3][0]);
+
+
+		/*
 		glVertex3fv(&vertices[2][0]);
 		glTexCoord2fv(&texcoords[2][0]);
 
 		glVertex3fv(&vertices[3][0]);
 		glTexCoord2fv(&texcoords[3][0]);
+		*/
+
+//		glVertex3fv(&vertices[3][0]);
+//		glTexCoord2fv(&texcoords[3][0]);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glPopAttrib();
+	glPopMatrix();
 //	int h;
 //	glGenBuffers(1, &h);
 //	glBindBuffer(GL_ARRAY_BUFFER, h);
@@ -80,6 +107,38 @@ void def_resize(int w, int h) {
 	glLoadIdentity();
 }
 
+GLuint checkerboard() {
+	const int TEX_SIZE = 256;
+	GLubyte image[TEX_SIZE][TEX_SIZE][4];
+	int i, j, c;
+
+	for (i = 0; i < TEX_SIZE; i++) {
+		for (j = 0; j < TEX_SIZE; j++) {
+			c = (((i & 8) == 0) ^ ((j & 8) == 0));
+			c = c * 255;
+			image[i][j][0] = (GLubyte) c;
+			image[i][j][1] = (GLubyte) c;
+			image[i][j][2] = (GLubyte) c;
+			image[i][j][3] = (GLubyte) 255;
+		}
+	}
+
+	GLuint id;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEX_SIZE, TEX_SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+			image);
+
+	//Params
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return id;
+}
 
 void def_initgl() {
 	//Setup Shading Environment
@@ -102,6 +161,7 @@ void def_initgl() {
 	glEnable(GL_POLYGON_SMOOTH);
 	glEnable(GL_LINE_SMOOTH);
 
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_STENCIL_TEST);
@@ -155,6 +215,9 @@ int main(int argc, char* argv[]) {
 	glutCloseFunc(close);
 	glutIdleFunc(time_step);
 
+
+	//create default texture
+	g_checkerboard = checkerboard();
 
 	//init gl
 	def_initgl();
