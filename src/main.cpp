@@ -5,8 +5,6 @@
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
 
-#define DEFAULT_WIDTH 800
-#define DEFAULT_HEIGHT 600
 #define FOVY 45.0
 #define ZNEAR 0.01
 #define ZFAR 100.0
@@ -14,6 +12,7 @@
 using namespace std;
 using namespace sda;
 using namespace sda::utils;
+
 
 GLuint g_checkerboard = 0;
 
@@ -54,27 +53,12 @@ void draw() {
 
 		glTexCoord2fv(&texcoords[3][0]);
 		glVertex3fv(&vertices[3][0]);
-
-
-		/*
-		glVertex3fv(&vertices[2][0]);
-		glTexCoord2fv(&texcoords[2][0]);
-
-		glVertex3fv(&vertices[3][0]);
-		glTexCoord2fv(&texcoords[3][0]);
-		*/
-
-//		glVertex3fv(&vertices[3][0]);
-//		glTexCoord2fv(&texcoords[3][0]);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glPopAttrib();
 	glPopMatrix();
-//	int h;
-//	glGenBuffers(1, &h);
-//	glBindBuffer(GL_ARRAY_BUFFER, h);
 
 	glutSwapBuffers();
 }
@@ -221,6 +205,10 @@ int main(int argc, char* argv[]) {
 
 	//init gl
 	def_initgl();
+
+	//create raytracer
+	ps::raytracer::RayTracer rt;
+	rt.run();
 
 	glutMainLoop();
 

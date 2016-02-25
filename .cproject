@@ -31,6 +31,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.401409585" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${SDACCEL_ROOT}/runtime/include/1_2&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/base}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1649367710" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -66,6 +67,9 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 			<storageModule moduleId="scannerConfiguration">
 				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -148,7 +152,7 @@
 						<parser enabled="true"/>
 					</scannerInfoProvider>
 				</profile>
-				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.153282375;cdt.managedbuild.config.gnu.exe.release.153282375.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1501823241;cdt.managedbuild.tool.gnu.c.compiler.input.571749248">
+				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1293949544;cdt.managedbuild.config.gnu.exe.debug.1293949544.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1537430262;cdt.managedbuild.tool.gnu.c.compiler.input.767638690">
 					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 					<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
 						<buildOutputProvider>
@@ -231,7 +235,7 @@
 						</scannerInfoProvider>
 					</profile>
 				</scannerConfigBuildInfo>
-				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1293949544;cdt.managedbuild.config.gnu.exe.debug.1293949544.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1537430262;cdt.managedbuild.tool.gnu.c.compiler.input.767638690">
+				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.153282375;cdt.managedbuild.config.gnu.exe.release.153282375.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1501823241;cdt.managedbuild.tool.gnu.c.compiler.input.571749248">
 					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 					<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
 						<buildOutputProvider>
@@ -481,9 +485,6 @@
 					</profile>
 				</scannerConfigBuildInfo>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
-			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.gnu.exe.release.153282375">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.release.153282375" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -513,6 +514,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.149452924" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${SDACCEL_ROOT}/runtime/include/1_2&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/base}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1618856828" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -548,6 +550,9 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 			<storageModule moduleId="scannerConfiguration">
 				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -630,7 +635,7 @@
 						<parser enabled="true"/>
 					</scannerInfoProvider>
 				</profile>
-				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.153282375;cdt.managedbuild.config.gnu.exe.release.153282375.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1501823241;cdt.managedbuild.tool.gnu.c.compiler.input.571749248">
+				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1293949544;cdt.managedbuild.config.gnu.exe.debug.1293949544.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1537430262;cdt.managedbuild.tool.gnu.c.compiler.input.767638690">
 					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 					<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
 						<buildOutputProvider>
@@ -713,7 +718,7 @@
 						</scannerInfoProvider>
 					</profile>
 				</scannerConfigBuildInfo>
-				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1293949544;cdt.managedbuild.config.gnu.exe.debug.1293949544.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1537430262;cdt.managedbuild.tool.gnu.c.compiler.input.767638690">
+				<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.153282375;cdt.managedbuild.config.gnu.exe.release.153282375.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1501823241;cdt.managedbuild.tool.gnu.c.compiler.input.571749248">
 					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 					<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
 						<buildOutputProvider>
@@ -963,9 +968,6 @@
 					</profile>
 				</scannerConfigBuildInfo>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
-			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">

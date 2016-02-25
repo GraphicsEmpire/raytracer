@@ -8,20 +8,43 @@
 #ifndef RAYTRACER_CPUONLY_H_
 #define RAYTRACER_CPUONLY_H_
 
+#include <vector>
 #include "common/logger.h"
+#include "base/ray.h"
+#include "sgnode.h"
 
-namespace sda {
+#define DEFAULT_WIDTH 512
+#define DEFAULT_HEIGHT 512
+
+using namespace std;
+using namespace ps::scene;
+using namespace ps::base;
+
+namespace ps {
+namespace raytracer {
+
 
 class RayTracer {
 public:
 	RayTracer();
+	RayTracer(int nx, int ny, int super_samples = 1);
 	virtual ~RayTracer();
+
+	void setup(int nx, int ny, int supersamples);
 
 	bool run();
 
+
+protected:
+	int m_nx;
+	int m_ny;
+	int m_supersamps;
+
+	vector<SGNode*> m_vnodes;
 };
 
 
+}
 }
 
 #endif /* RAYTRACER_CPUONLY_H_ */
