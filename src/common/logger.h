@@ -56,9 +56,9 @@ ALL TIMES.
 #define ENABLE_LOG_TIME 1
 
 //global logging
-#define LogInfo(desc, ...) sda::LogWrapper(0, __FILE__, __LINE__, desc, ##__VA_ARGS__)
-#define LogWarn(desc, ...) sda::LogWrapper(1, __FILE__, __LINE__, desc, ##__VA_ARGS__)
-#define LogError(desc, ...) sda::LogWrapper(2, __FILE__, __LINE__, desc, ##__VA_ARGS__)
+#define vloginfo(desc, ...) sda::LogWrapper(0, __FILE__, __LINE__, desc, ##__VA_ARGS__)
+#define vlogwarn(desc, ...) sda::LogWrapper(1, __FILE__, __LINE__, desc, ##__VA_ARGS__)
+#define vlogerror(desc, ...) sda::LogWrapper(2, __FILE__, __LINE__, desc, ##__VA_ARGS__)
 
 using namespace std;
 

@@ -12,9 +12,11 @@
 using namespace std;
 using namespace sda;
 using namespace sda::utils;
+using namespace ps::raytracer;
 
+//create raytracer
+ps::raytracer::RayTracer* g_prt = NULL;
 
-GLuint g_checkerboard = 0;
 
 void draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -28,10 +30,9 @@ void draw() {
 	float texcoords [4][2] = { {0.0, 0.0}, {1.0, 0.0},
 						  {1.0, 1.0}, {0.0, 1.0} };
 
-	if(g_checkerboard) {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, g_checkerboard);
-	}
+	//binds rt frame
+	if(g_prt)
+		g_prt->framebuffer().bind();
 
 
 	glPushMatrix();
@@ -55,7 +56,9 @@ void draw() {
 		glVertex3fv(&vertices[3][0]);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//unbinds ray tracer frame
+	if(g_prt)
+		g_prt->framebuffer().unbind();
 
 	glPopAttrib();
 	glPopMatrix();
@@ -76,6 +79,7 @@ void time_step() {
 }
 
 void close() {
+	SAFE_DELETE(g_prt);
 
 }
 
@@ -91,38 +95,6 @@ void def_resize(int w, int h) {
 	glLoadIdentity();
 }
 
-GLuint checkerboard() {
-	const int TEX_SIZE = 256;
-	GLubyte image[TEX_SIZE][TEX_SIZE][4];
-	int i, j, c;
-
-	for (i = 0; i < TEX_SIZE; i++) {
-		for (j = 0; j < TEX_SIZE; j++) {
-			c = (((i & 8) == 0) ^ ((j & 8) == 0));
-			c = c * 255;
-			image[i][j][0] = (GLubyte) c;
-			image[i][j][1] = (GLubyte) c;
-			image[i][j][2] = (GLubyte) c;
-			image[i][j][3] = (GLubyte) 255;
-		}
-	}
-
-	GLuint id;
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEX_SIZE, TEX_SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE,
-			image);
-
-	//Params
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	return id;
-}
 
 void def_initgl() {
 	//Setup Shading Environment
@@ -169,7 +141,7 @@ void onkey(unsigned char key, int x, int y) {
 
 
 	case(27): {
-		LogInfo("closing...");
+		vloginfo("closing...");
 		glutLeaveMainLoop();
 	}
 	break;
@@ -177,7 +149,7 @@ void onkey(unsigned char key, int x, int y) {
 }
 
 int main(int argc, char* argv[]) {
-	LogInfo("Starting raytracer.");
+	vloginfo("Starting raytracer.");
 
 	CmdLineParser parser;
 	parser.parse(argc, argv);
@@ -200,15 +172,12 @@ int main(int argc, char* argv[]) {
 	glutIdleFunc(time_step);
 
 
-	//create default texture
-	g_checkerboard = checkerboard();
-
 	//init gl
 	def_initgl();
 
-	//create raytracer
-	ps::raytracer::RayTracer rt;
-	rt.run();
+	//run the raytracer
+	g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
+	g_prt->run();
 
 	glutMainLoop();
 

@@ -24,6 +24,10 @@ void RayTracer::setup(int nx, int ny, int supersamples) {
 	m_ny = ny;
 	m_supersamps = supersamples;
 
+
+	U32 id = GLTexture::create_checkerboard(m_nx, m_ny);
+	vec3i dim(m_nx, m_ny, 4);
+	m_gltex.set(dim, id);
 }
 
 RayTracer::~RayTracer() {
@@ -59,6 +63,9 @@ bool RayTracer::run() {
 
 				if(count > 0) {
 
+				}
+				else {
+					hitrec.rgba = Color::grey();
 				}
 			}
 		}

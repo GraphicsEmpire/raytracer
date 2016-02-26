@@ -12,6 +12,8 @@
 #include "common/logger.h"
 #include "base/ray.h"
 #include "sgnode.h"
+#include "pixmap.h"
+#include "glbackend/gltexture.h"
 
 #define DEFAULT_WIDTH 512
 #define DEFAULT_HEIGHT 512
@@ -19,6 +21,8 @@
 using namespace std;
 using namespace ps::scene;
 using namespace ps::base;
+using namespace ps::opengl;
+
 
 namespace ps {
 namespace raytracer {
@@ -30,10 +34,12 @@ public:
 	RayTracer(int nx, int ny, int super_samples = 1);
 	virtual ~RayTracer();
 
-	void setup(int nx, int ny, int supersamples);
+	void setup(int nx, int ny, int supersamples = 1);
 
 	bool run();
 
+	//return framebuffer
+	GLTexture& framebuffer() { return m_gltex;}
 
 protected:
 	int m_nx;
@@ -41,6 +47,7 @@ protected:
 	int m_supersamps;
 
 	vector<SGNode*> m_vnodes;
+	GLTexture m_gltex;
 };
 
 
