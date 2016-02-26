@@ -1,7 +1,7 @@
 #include <string.h>
 #include "pixmap.h"
 #include "base/directory.h"
-#include "lodepng.h"
+#include "lodepng/lodepng.h"
 
 
 namespace ps {

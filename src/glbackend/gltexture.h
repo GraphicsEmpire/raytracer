@@ -15,7 +15,7 @@ namespace ps {
         class GLTexture : public GLBindable {
         public:
             GLTexture();
-            GLTexture(const Pixmap& pixmap);
+            GLTexture(const Pixmap& pixmap, int texunit = 0);
             GLTexture(const AnsiStr& strFP, int texunit = 0);
             virtual ~GLTexture();
             

@@ -72,7 +72,13 @@ endif(NOT OPENGL_FOUND)
 ###############################
 # Other include paths
 ###############################
-include_directories(src src/common/ )
+include_directories(src/
+					src/common/ 
+					src/base/ 
+					src/glbackend/ 
+					src/3rdparty/
+					src/3rdparty/lodepng/
+					)
 
 
 ###############################
@@ -87,8 +93,17 @@ file(GLOB SRC
 	src/common/logger.cpp
 	src/common/simplebmp.h
 	src/common/simplebmp.cpp
+	src/3rdparty/lodepng/*.h
+	src/3rdparty/lodepng/*.cpp
+	src/base/*.h
+	src/base/*.cpp
+	src/glbackend/*.h
+	src/glbackend/*.cpp
 	src/raytracer_cpuonly.h
 	src/raytracer_cpuonly.cpp
+	src/sgnode.h
+	src/sgsphere.h
+	src/sgsphere.cpp
 	src/main.cpp	
 	)
 

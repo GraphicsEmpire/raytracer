@@ -12,7 +12,8 @@
 #include "common/logger.h"
 #include "base/ray.h"
 #include "sgnode.h"
-#include "pixmap.h"
+#include "base/pixmap.h"
+#include "sgnode.h"
 #include "glbackend/gltexture.h"
 
 #define DEFAULT_WIDTH 512

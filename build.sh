@@ -47,10 +47,10 @@ echo "INFO: SDACCEL_RUNTIME=${SDACCEL_RUNTIME}"
 echo "INFO: OpenCL_INCPATH=${OpenCL_INCPATH}"
 echo "INFO: OpenCL_LIBPATH=${OpenCL_LIBPATH}"
 
-mkdir -p bin
-pushd bin
+##mkdir -p bin
+##pushd bin
 
-cmake -DOpenCL_INCPATH="${OpenCL_INCPATH}" -DOpenCL_LIBPATH="${OpenCL_LIBPATH}" ..
+cmake -DOpenCL_INCPATH="${OpenCL_INCPATH}" -DOpenCL_LIBPATH="${OpenCL_LIBPATH}" .
 make
 
-popd
+##popd

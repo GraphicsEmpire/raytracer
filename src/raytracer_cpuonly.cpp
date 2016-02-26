@@ -5,7 +5,13 @@
  *      Author: pouryas
  */
 
+#include <GL/freeglut_std.h>
+
 #include "raytracer_cpuonly.h"
+#include "sgnode.h"
+
+using namespace ps::scene;
+
 
 namespace ps {
 namespace raytracer {
@@ -36,13 +42,16 @@ RayTracer::~RayTracer() {
 }
 
 bool RayTracer::run() {
+	vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);
 
 	vec3f eye_pos(0, 0, 0);
 	vec3f eye_dir(0, 0, 1);
 	float image_plane_dist = 4.0f;
+        U32 total_primary_rays = m_nx * m_ny * m_supersamps;
 
 	//left - right = -1, 1
 	//bottom - top = -1, 1
+	Pixmap pix(m_nx, m_ny);
 
 	for(int x = 0; x < m_nx; x++) {
 		for(int y = 0; y < m_ny; y++) {
@@ -53,13 +62,15 @@ bool RayTracer::run() {
 			vec3f end(u, v, image_plane_dist);
 
 			Ray r(eye_pos, end - eye_pos);
+                        HitRecord hitrec;
+                        
+                        hitrec.bounces = 0;
+                        hitrec.rgba = Color::grey();
 
-
-			for(int i=0; i < (int)m_vnodes.size(); i++) {
-
-				HitRecord hitrec;
+                        //hit all nodes in the scene
+			for(int inode=0; inode < (int)m_vnodes.size(); inode++) {			
 				RangeF range;
-				int count = m_vnodes[i]->hit(r, range, hitrec);
+				int count = m_vnodes[inode]->hit(r, range, hitrec);
 
 				if(count > 0) {
 
@@ -68,8 +79,27 @@ bool RayTracer::run() {
 					hitrec.rgba = Color::grey();
 				}
 			}
+                        
+                        //put pixel
+                        pix.putp(x, y, hitrec.rgba);
 		}
+
+		//update texture
+		m_gltex.set(pix);
+                
+                U32 finished = x * m_ny;
+                float ratio = (float) finished / (float) total_primary_rays;
+                vloginfo("progress = %.2f", ratio * 100.0f);
 	}
+        
+        
+        //finalize image
+        pix.putp(0, 0, Color::green());
+        pix.putp(pix.width()-1, pix.height()-1, Color::red());
+        m_gltex.set(pix);
+        
+        glutPostRedisplay();
+        
 
 	return true;
 }

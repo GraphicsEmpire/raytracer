@@ -5,7 +5,7 @@
 #include "gltypes.h"
 #include "logger.h"
 #include "base/directory.h"
-#include "lodepng.h"
+#include "lodepng/lodepng.h"
 
 using namespace ps;
 using namespace sda;
@@ -28,6 +28,13 @@ GLTexture::GLTexture(const AnsiStr& strFP, int texunit) {
     if(!read(strFP)) {
         vlogerror("Texture creation failed for file: %s", strFP.cptr());
     }
+}
+
+GLTexture::GLTexture(const Pixmap& pixmap, int texunit) {
+
+	m_texunit = texunit;
+
+
 }
 
 GLTexture::~GLTexture() {
@@ -151,7 +158,30 @@ void GLTexture::set(const vec3i& dim, U32 handle, int texunit) {
 }
 
 void GLTexture::set(const Pixmap& pixmap, int texunit) {
-	cleanup();
+    cleanup();
+
+    m_dim = vec3i(pixmap.width(), pixmap.height(), pixmap.depth());
+    m_gltex = GL_INVALID_VALUE;
+    m_texunit = texunit;
+            
+    //Generate Texture
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    glActiveTexture(GL_TEXTURE0 + m_texunit);
+    
+    glGenTextures(1, &m_gltex);
+    glBindTexture(GL_TEXTURE_2D, m_gltex);
+
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, pixmap.width(), pixmap.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                 pixmap.const_data());
+
+    //Params
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glPopAttrib();
 }
 
 void GLTexture::bind() {

@@ -1,0 +1,8 @@
+
+# support for sphere
+# support for triangle
+# support for triangle-mesh
+# support for camera
+# support for light sources
+# support for yaml
+# opencl kernels

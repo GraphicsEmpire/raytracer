@@ -1,0 +1,19 @@
+## simple scene with a sphere in the middle
+---
+material:
+    - crimson:
+        ambient: [1.0, 0, 0]
+        diffused: [0.8, 0, 0]
+        specular: [1.0, 1.0, 1.0]
+        shininess: 8.0
+        
+
+##camera:
+##    - 
+    
+geometry:
+    - sphere:
+        center: [0, 0, 0]
+        radius: 2.0
+        material: crimson
+        
