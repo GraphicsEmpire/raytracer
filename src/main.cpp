@@ -181,7 +181,7 @@ int main(int argc, char* argv[]) {
 	g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
         
         //add sphere 
-        SGSphere* sp = new SGSphere(vec3f(0.0f), 2.0);
+        SGSphere* sp = new SGSphere(vec3f(0.0f), 0.001f);
         g_prt->add_node(sp);
         
 	g_prt->run();

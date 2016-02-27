@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 2.8)
 #project name
 project(raytracer_host.exe)
 
+#debug build
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
 ###############################
 # Custom find modules
 ###############################

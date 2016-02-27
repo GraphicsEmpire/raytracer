@@ -56,7 +56,7 @@ bool RayTracer::run() {
 
 	vec3f eye_pos(0, 0, 0);
 	vec3f eye_dir(0, 0, 1);
-	float image_plane_dist = 4.0f;
+	float image_plane_dist = 8.0f;
         U32 total_primary_rays = m_nx * m_ny * m_supersamps;
 
 	//left - right = -1, 1
@@ -71,7 +71,7 @@ bool RayTracer::run() {
 
 			vec3f end(u, v, image_plane_dist);
 
-			Ray r(eye_pos, end - eye_pos);
+			Ray r(eye_pos, (end - eye_pos).normalized());
                         HitRecord hitrec;
                         
                         hitrec.bounces = 0;
@@ -79,11 +79,12 @@ bool RayTracer::run() {
 
                         //hit all nodes in the scene
 			for(int inode=0; inode < (int)m_vnodes.size(); inode++) {			
-				RangeF range;
+				RangeF range(0.0f, FLT_MAX);
+                                
 				int count = m_vnodes[inode]->hit(r, range, hitrec);
-
 				if(count > 0) {
-
+                                    //vloginfo("hit sphere at [%u, %u] ", x, y);
+                                    break;
 				}
 				else {
 					hitrec.rgba = Color::grey();
@@ -96,6 +97,7 @@ bool RayTracer::run() {
 
 		//update texture
 		m_gltex.set(pix);
+                glutPostRedisplay();
                 
                 U32 finished = x * m_ny;
                 float ratio = (float) finished / (float) total_primary_rays;

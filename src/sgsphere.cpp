@@ -5,11 +5,9 @@
  *      Author: pouryas
  */
 
-#include <c++/4.1.2/bits/stl_iterator_base_funcs.h>
-#include <c++/4.1.2/cmath>
 #include <algorithm>
-
 #include "sgsphere.h"
+#include "logger.h"
 
 namespace ps {
 namespace scene {
@@ -40,13 +38,13 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     //C = (e-c).(e-c) - R2
     vec3f e_min_c = r.start - m_center;
     
-//    float a = vec3f::dot(r.direction, r.direction);
-//    float b = 2.0f * vec3f::dot(r.direction, e_min_c);
-//    float c = vec3f::dot(e_min_c, e_min_c) - m_radius * m_radius;
-//    
-//    float discriminant = b * b - 4.0f * a * c;
+    float a = vec3f::dot(r.direction, r.direction);
+    float b = 2.0f * vec3f::dot(r.direction, e_min_c);
+    float c = vec3f::dot(e_min_c, e_min_c) - m_radius * m_radius;
     
-    /*
+    float discriminant = b * b - 4.0f * a * c;
+    
+
     if(discriminant < 0.0f)
         return 0;
 
@@ -54,13 +52,29 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     float t1 = (-1.0f * b + ds) / (2.0f * a);
     float t2 = (-1.0f * b - ds) / (2.0f * a);
     
-    hitrec.bounces ++;
+    bool is1 = interval.isInside(t1);
+    bool is2 = interval.isInside(t2);
+    if(!is1 && !is2)
+        return 0;
     
-    hitrec.t = MATHMIN(t1, t2);
+    if(is1 && is2) {
+        hitrec.t = MATHMIN(t1, t2);          
+    }
+    else if(is1)
+        hitrec.t = t1;
+    else if(is2)
+        hitrec.t = t2;
+    
+    hitrec.bounces ++;       
     hitrec.p = r.point(hitrec.t);
-    //hitrec.n = (hitrec.p - m_center).normalized();
+    hitrec.n = (hitrec.p - m_center).normalized();
+    hitrec.rgba = Color::red();
     
-    */
+    if(hitrec.t < 0.0) {
+        vlogwarn("hit sphere behind camera!");
+    }
+    
+    return 1;
 }
 
 }
