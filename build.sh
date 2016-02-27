@@ -37,7 +37,9 @@ then
 	echo "INFO: detected SDAccel root at ${SDACCEL_ROOT}" 
 fi
 
+export RUNTIME_LIB_DIR="x86_64"
 echo "INFO: SDACCEL_ROOT=${SDACCEL_ROOT}"
+echo "INFO: RUNTIME_LIB_DIR=${RUNTIME_LIB_DIR}"
 
 export SDACCEL_RUNTIME="${SDACCEL_ROOT}/runtime/"
 export OpenCL_INCPATH="${SDACCEL_RUNTIME}/include/1_2/"

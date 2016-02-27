@@ -39,12 +39,14 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     //B = 2d.(e-c)
     //C = (e-c).(e-c) - R2
     vec3f e_min_c = r.start - m_center;
-    float a = vec3f::dot(r.direction, r.direction);
-    float b = 2.0f * vec3f::dot(r.direction, e_min_c);
-    float c = vec3f::dot(e_min_c, e_min_c) - m_radius * m_radius;
     
-    float discriminant = b * b - 4.0f * a * c;
+//    float a = vec3f::dot(r.direction, r.direction);
+//    float b = 2.0f * vec3f::dot(r.direction, e_min_c);
+//    float c = vec3f::dot(e_min_c, e_min_c) - m_radius * m_radius;
+//    
+//    float discriminant = b * b - 4.0f * a * c;
     
+    /*
     if(discriminant < 0.0f)
         return 0;
 
@@ -58,7 +60,7 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     hitrec.p = r.point(hitrec.t);
     //hitrec.n = (hitrec.p - m_center).normalized();
     
-    
+    */
 }
 
 }
