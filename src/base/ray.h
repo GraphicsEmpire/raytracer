@@ -14,7 +14,7 @@ public:
 	vec3f start;
 	vec3f direction;
 	vec3f inv_direction;
-	int	  sign[3];
+	int sign[3];
 
 public:
 	Ray() 	{
@@ -38,12 +38,12 @@ public:
 	}
 
 	//Start
-	vec3f getStart() const {return this->start;}
-	void setStart(const vec3f& s) { this->start = s;}
+	vec3f get_start() const {return this->start;}
+	void set_start(const vec3f& s) { this->start = s;}
 
 	//Direction
-	vec3f getDirection() const {return this->direction;}
-	void setDirection(const vec3f& dir) {
+	vec3f get_direction() const {return this->direction;}
+	void set_direction(const vec3f& dir) {
 		direction = dir;
 		inv_direction = vec3f(1/dir.x, 1/dir.y, 1/dir.z);
 		sign[0] = (inv_direction.x < 0.0f);

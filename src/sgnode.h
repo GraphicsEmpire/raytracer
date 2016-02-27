@@ -23,6 +23,8 @@ namespace scene {
  */
 struct HitRecord {
 	float t;
+        vec3f p;
+        vec3f n;
 	int bounces;
 	Color rgba;
 };

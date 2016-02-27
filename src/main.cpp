@@ -4,6 +4,7 @@
 #include "raytracer_cpuonly.h"
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
+#include "sgsphere.h"
 
 #define FOVY 45.0
 #define ZNEAR 0.01
@@ -13,6 +14,7 @@ using namespace std;
 using namespace sda;
 using namespace sda::utils;
 using namespace ps::raytracer;
+using namespace ps::scene;
 
 //create raytracer
 ps::raytracer::RayTracer* g_prt = NULL;
@@ -166,7 +168,7 @@ int main(int argc, char* argv[]) {
 	glutMotionFunc(mouse_move);
 	//glutMouseWheelFunc(MouseWheel);
 	//glutSpecialFunc(SpecialKey);
-	//	glutPassiveMotionFunc(MousePassiveMove);
+	//glutPassiveMotionFunc(MousePassiveMove);
 
 	glutCloseFunc(close);
 	glutIdleFunc(time_step);
@@ -177,6 +179,11 @@ int main(int argc, char* argv[]) {
 
 	//run the raytracer
 	g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
+        
+        //add sphere 
+        SGSphere* sp = new SGSphere(vec3f(0.0f), 2.0);
+        g_prt->add_node(sp);
+        
 	g_prt->run();
 
 	glutMainLoop();

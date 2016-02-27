@@ -20,6 +20,7 @@ namespace base {
  */
 class AABB {
 public:
+    
     AABB() {
         m_lower = m_upper = vec3(0,0,0);
     }

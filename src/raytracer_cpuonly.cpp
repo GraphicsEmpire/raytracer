@@ -38,8 +38,18 @@ void RayTracer::setup(int nx, int ny, int supersamples) {
 
 RayTracer::~RayTracer() {
 
-
+    cleanup();
 }
+
+void RayTracer::cleanup() {
+    
+    m_gltex.cleanup();
+    
+    for(U32 i=0; i < m_vnodes.size(); i++) {
+        SAFE_DELETE(m_vnodes[i]);
+    }
+}
+
 
 bool RayTracer::run() {
 	vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);

@@ -41,6 +41,14 @@ public:
 
 	//return framebuffer
 	GLTexture& framebuffer() { return m_gltex;}
+        
+        int add_node(SGNode* pnode) { 
+            m_vnodes.push_back(pnode);
+            return ((int)m_vnodes.size() - 1);
+        }
+        
+protected:
+    void cleanup();
 
 protected:
 	int m_nx;
