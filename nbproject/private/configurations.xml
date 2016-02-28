@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="cmake">
+      </df>
+      <df name="CMakeFiles">
+        <df name="2.8.12.2">
+          <df name="CompilerIdC">
+            <in>CMakeCCompilerId.c</in>
+          </df>
+          <df name="CompilerIdCXX">
+            <in>CMakeCXXCompilerId.cpp</in>
+          </df>
+        </df>
+        <df name="CMakeTmp">
+        </df>
+        <df name="raytracer_host.exe.dir">
+          <df name="src">
+            <df name="3rdparty">
+              <df name="lodepng">
+              </df>
+            </df>
+            <df name="base">
+            </df>
+            <df name="common">
+            </df>
+            <df name="glbackend">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="input">
+      </df>
+      <df name="src">
+        <df name="3rdparty">
+          <df name="lodepng">
+            <in>lodepng.cpp</in>
+            <in>lodepng.h</in>
+          </df>
+        </df>
+        <df name="base">
+          <in>aabb.cpp</in>
+          <in>aabb.h</in>
+          <in>base.h</in>
+          <in>color.h</in>
+          <in>directory.cpp</in>
+          <in>directory.h</in>
+          <in>interval.h</in>
+          <in>matrix.cpp</in>
+          <in>matrix.h</in>
+          <in>pixmap.cpp</in>
+          <in>pixmap.h</in>
+          <in>quat.h</in>
+          <in>ray.h</in>
+          <in>str.cpp</in>
+          <in>str.h</in>
+          <in>strbase.h</in>
+          <in>vec.h</in>
+        </df>
+        <df name="common">
+          <in>cmdlineparser.cpp</in>
+          <in>cmdlineparser.h</in>
+          <in>lodepng.h</in>
+          <in>logger.cpp</in>
+          <in>logger.h</in>
+          <in>simplebmp.cpp</in>
+          <in>simplebmp.h</in>
+          <in>xcl.cpp</in>
+          <in>xcl.h</in>
+        </df>
+        <df name="glbackend">
+          <in>glbindable.cpp</in>
+          <in>glbindable.h</in>
+          <in>glselect.h</in>
+          <in>gltexture.cpp</in>
+          <in>gltexture.h</in>
+          <in>gltypes.h</in>
+        </df>
+        <in>main.cpp</in>
+        <in>raytracer_cpuonly.cpp</in>
+        <in>raytracer_cpuonly.h</in>
+        <in>sgnode.h</in>
+        <in>sgsphere.cpp</in>
+        <in>sgsphere.h</in>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

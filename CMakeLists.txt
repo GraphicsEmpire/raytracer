@@ -27,7 +27,7 @@ MESSAGE( STATUS "PARENT_DIR: " ${PARENT_DIR})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PARENT_DIR}/cmake/")
 #set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} src/3rdparty/xirpower)
 
-#opencl path                    
+#opencl path
 ##set(XILINX_SDACCEL "/proj/xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/2015.4")
 #set(OpenCL_INCPATH ${XILINX_SDACCEL}/runtime/include/1_2/)
 #set(OpenCL_LIBPATH ${XILINX_SDACCEL}/runtime/lib/x86_64/)
@@ -55,6 +55,8 @@ endif(NOT OPENCL_FOUND)
 # FIND GLUT
 #########################################################
 find_package(GLUT REQUIRED)
+
+message("**GLUT_INCLUDE_DIRS:" ${GLUT_INCLUDE_DIRS})
 include_directories(${GLUT_INCLUDE_DIRS})
 link_directories(${GLUT_LIBRARY_DIRS})
 add_definitions(${GLUT_DEFINITIONS})
@@ -77,9 +79,9 @@ endif(NOT OPENGL_FOUND)
 # Other include paths
 ###############################
 include_directories(src/
-					src/common/ 
-					src/base/ 
-					src/glbackend/ 
+					src/common/
+					src/base/
+					src/glbackend/
 					src/3rdparty/
 					src/3rdparty/lodepng/
 					)
@@ -108,7 +110,7 @@ file(GLOB SRC
 	src/sgnode.h
 	src/sgsphere.h
 	src/sgsphere.cpp
-	src/main.cpp	
+	src/main.cpp
 	)
 
 ###############################

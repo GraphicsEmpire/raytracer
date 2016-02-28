@@ -5,8 +5,8 @@
  *      Author: pouryas
  */
 
-#include <GL/freeglut_std.h>
-
+//#include <GL/freeglut_std.h>
+#include "glbackend/glselect.h"
 #include "raytracer_cpuonly.h"
 #include "sgnode.h"
 
@@ -42,9 +42,9 @@ RayTracer::~RayTracer() {
 }
 
 void RayTracer::cleanup() {
-    
+
     m_gltex.cleanup();
-    
+
     for(U32 i=0; i < m_vnodes.size(); i++) {
         SAFE_DELETE(m_vnodes[i]);
     }
@@ -73,14 +73,14 @@ bool RayTracer::run() {
 
 			Ray r(eye_pos, (end - eye_pos).normalized());
                         HitRecord hitrec;
-                        
+
                         hitrec.bounces = 0;
                         hitrec.rgba = Color::grey();
 
                         //hit all nodes in the scene
-			for(int inode=0; inode < (int)m_vnodes.size(); inode++) {			
+			for(int inode=0; inode < (int)m_vnodes.size(); inode++) {
 				RangeF range(0.0f, FLT_MAX);
-                                
+
 				int count = m_vnodes[inode]->hit(r, range, hitrec);
 				if(count > 0) {
                                     //vloginfo("hit sphere at [%u, %u] ", x, y);
@@ -90,7 +90,7 @@ bool RayTracer::run() {
 					hitrec.rgba = Color::grey();
 				}
 			}
-                        
+
                         //put pixel
                         pix.putp(x, y, hitrec.rgba);
 		}
@@ -98,24 +98,23 @@ bool RayTracer::run() {
 		//update texture
 		m_gltex.set(pix);
                 glutPostRedisplay();
-                
+
                 U32 finished = x * m_ny;
                 float ratio = (float) finished / (float) total_primary_rays;
                 vloginfo("progress = %.2f", ratio * 100.0f);
 	}
-        
-        
+
+
         //finalize image
         pix.putp(0, 0, Color::green());
         pix.putp(pix.width()-1, pix.height()-1, Color::red());
         m_gltex.set(pix);
-        
+
         glutPostRedisplay();
-        
+
 
 	return true;
 }
 
 }
 }
-

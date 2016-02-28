@@ -47,7 +47,11 @@ ALL TIMES.
 #pragma once
 
 //#include <xcl.h>
-#include "CL/opencl.h"
+#ifdef __APPLE__
+    #include "OpenCL/opencl.h"
+#else
+    #include "CL/cl.h"
+#endif
 
 typedef struct {
 	cl_platform_id platform_id;

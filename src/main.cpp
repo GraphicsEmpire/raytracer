@@ -1,6 +1,7 @@
 
 #include <iostream>
-#include <GL/freeglut.h>
+
+#include "glbackend/glselect.h"
 #include "raytracer_cpuonly.h"
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
@@ -144,7 +145,13 @@ void onkey(unsigned char key, int x, int y) {
 
 	case(27): {
 		vloginfo("closing...");
-		glutLeaveMainLoop();
+
+		#ifdef PS_OS_MAC
+			close();
+			exit(0);
+		#else
+				glutLeaveMainLoop();
+		#endif
 	}
 	break;
 	}
@@ -170,7 +177,13 @@ int main(int argc, char* argv[]) {
 	//glutSpecialFunc(SpecialKey);
 	//glutPassiveMotionFunc(MousePassiveMove);
 
+#ifdef PS_OS_MAC
+	glutWMCloseFunc(close);
+#else
 	glutCloseFunc(close);
+#endif
+
+
 	glutIdleFunc(time_step);
 
 
@@ -179,11 +192,11 @@ int main(int argc, char* argv[]) {
 
 	//run the raytracer
 	g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
-        
-        //add sphere 
+
+        //add sphere
         SGSphere* sp = new SGSphere(vec3f(0.0f), 0.001f);
         g_prt->add_node(sp);
-        
+
 	g_prt->run();
 
 	glutMainLoop();

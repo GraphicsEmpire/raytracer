@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="src">
+        <df name="3rdparty">
+          <df name="lodepng">
+            <in>lodepng.cpp</in>
+          </df>
+        </df>
+        <df name="base">
+          <in>aabb.cpp</in>
+          <in>directory.cpp</in>
+          <in>matrix.cpp</in>
+          <in>pixmap.cpp</in>
+          <in>str.cpp</in>
+        </df>
+        <df name="common">
+          <in>cmdlineparser.cpp</in>
+          <in>logger.cpp</in>
+          <in>simplebmp.cpp</in>
+          <in>xcl.cpp</in>
+        </df>
+        <df name="glbackend">
+          <in>glbindable.cpp</in>
+          <in>gltexture.cpp</in>
+        </df>
+        <in>main.cpp</in>
+        <in>raytracer_cpuonly.cpp</in>
+        <in>sgsphere.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>raytracer_host.exe</executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand>cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${IDE_CC} -DCMAKE_CXX_COMPILER=${IDE_CXX} -DCMAKE_C_FLAGS_DEBUG="-g3 -gdwarf-2" -DCMAKE_CXX_FLAGS_DEBUG="-g3 -gdwarf-2" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .</preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <folder path="0/src/3rdparty">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__DBL_DENORM_MIN__=4.9406564584124654e-324</Elem>
+            <Elem>__DBL_EPSILON__=2.2204460492503131e-16</Elem>
+            <Elem>__DBL_MAX__=1.7976931348623157e+308</Elem>
+            <Elem>__DBL_MIN__=2.2250738585072014e-308</Elem>
+            <Elem>__FLT_DENORM_MIN__=1.40129846e-45F</Elem>
+            <Elem>__FLT_EPSILON__=1.19209290e-7F</Elem>
+            <Elem>__FLT_MAX__=3.40282347e+38F</Elem>
+            <Elem>__FLT_MIN__=1.17549435e-38F</Elem>
+            <Elem>__GNUC_MINOR__=1</Elem>
+            <Elem>__GNUC_PATCHLEVEL__=2</Elem>
+            <Elem>__GNUC_RH_RELEASE__=54</Elem>
+            <Elem>__REGISTER_PREFIX__=</Elem>
+            <Elem>__USER_LABEL_PREFIX__=</Elem>
+            <Elem>__VERSION__="4.1.2 20080704 (Red Hat 4.1.2-54)"</Elem>
+            <Elem>__cplusplus=1</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <item path="src/3rdparty/lodepng/lodepng.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/base/aabb.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>src</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/base/directory.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/base/matrix.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/base/pixmap.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src</pElem>
+            <pElem>src/3rdparty</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/base/str.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/common/cmdlineparser.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/common</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/common/logger.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/common</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/common/simplebmp.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/common</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/common/xcl.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/common</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2/CL</pElem>
+            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/glbackend/glbindable.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/glbackend</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/glbackend/gltexture.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>src/base</pElem>
+            <pElem>src/glbackend</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/GL</pElem>
+            <pElem>src/common</pElem>
+            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src</pElem>
+            <pElem>src/3rdparty</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>src/base</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/GL</pElem>
+            <pElem>src/common</pElem>
+            <pElem>src/glbackend</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/raytracer_cpuonly.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/base</pElem>
+            <pElem>src</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>src/common</pElem>
+            <pElem>src/glbackend</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/sgsphere.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/c++/4.4.7</pElem>
+            <pElem>src/base</pElem>
+            <pElem>src</pElem>
+            <pElem>/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include</pElem>
+            <pElem>/usr/include/c++/4.4.7/tr1_impl</pElem>
+            <pElem>/usr/include/c++/4.4.7/bits</pElem>
+            <pElem>/usr/include/c++/4.4.7/ext</pElem>
+            <pElem>/usr/include/c++/4.4.7/debug</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux/bits</pElem>
+            <pElem>src/common</pElem>
+            <pElem>/usr/include/c++/4.4.7/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
