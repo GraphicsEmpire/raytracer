@@ -13,9 +13,14 @@ public:
 		m_color = vec4f(0,0,0,1);
 	}
 
+    explicit Color(float x) {
+        m_color = vec4f(x);
+    }
+
 	explicit Color(U8 r, U8 g, U8 b, U8 a = 255) {
 		fromRGBA(r, g, b, a);
 	}
+
 
 	explicit Color(const vec4u8& color) {
 		fromRGBA(color);

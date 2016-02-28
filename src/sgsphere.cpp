@@ -71,10 +71,11 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     else if(is2)
         hitrec.t = t2;
     
+    //set hitrec values
     hitrec.bounces ++;       
     hitrec.p = r.point(hitrec.t);
     hitrec.n = (hitrec.p - m_center).normalized();
-    hitrec.rgba = Color::red();
+    hitrec.material = this->material();
     
     if(hitrec.t < 0.0) {
         vlogwarn("hit sphere behind camera!");

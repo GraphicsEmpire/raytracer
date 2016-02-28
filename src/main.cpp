@@ -212,8 +212,10 @@ int main(int argc, char* argv[]) {
     g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
 
     //add sphere
-    SGSphere* sp = new SGSphere(vec3f(0, 0, 20), 0.04f);
+    SGSphere* sp = new SGSphere(vec3f(0, 0, 20), 0.2f);
+    sp->set_material(Material::red());
     g_prt->add_node(sp);
+    g_prt->addlight(vec3f(0, 10, 20), Color::white());
 
     //g_prt->run();
 

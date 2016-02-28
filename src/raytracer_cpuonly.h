@@ -28,8 +28,9 @@ using namespace ps::opengl;
 namespace ps {
 namespace raytracer {
 
-class LightSource {
-
+struct LightSource {
+    vec3f pos;
+    vec4f color;
 };
 
 class RayTracer {
@@ -40,26 +41,59 @@ public:
 
     void setup(int nx, int ny, int supersamples = 1);
 
+    /*!
+     * \brief run execute raytracer
+     * \return
+     */
     bool run();
 
     //return framebuffer
-    GLTexture& framebuffer() { return m_gltex;}
+    GLTexture& framebuffer() { return m_glframebuffer;}
 
     int add_node(SGNode* pnode) {
         m_vnodes.push_back(pnode);
         return ((int)m_vnodes.size() - 1);
     }
 
+
+    //lights
+    bool addlight(const vec3f& pos, const Color& color);
+    void removelight(int idx);
+    LightSource& light(int idx);
+public:
+    static const int max_light_sources = 8;
+
 protected:
     void cleanup();
+
+    /*!
+     * \brief phong_shading performs a phong shading implementation using the specified hitrecord
+     * and the supplied light sources. The material properties are transferred from the hitrecord.
+     * \param hitrec
+     * \return 4 channel color value for the pixel buffer
+     */
+    Color phong_shading(const HitRecord& hitrec);
 
 protected:
     int m_nx;
     int m_ny;
     int m_supersamps;
 
+    //cam pos
+    vec3f m_campos;
+
+
+    //background color
+    Color m_bgcolor;
+
+    //nodes
     vector<SGNode*> m_vnodes;
-    GLTexture m_gltex;
+
+    //lights
+    vector<LightSource> m_vlights;
+
+    //output
+    GLTexture m_glframebuffer;
 };
 
 

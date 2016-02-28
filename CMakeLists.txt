@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 #project name
 project(raytracer_host.exe)
 
+#add readme and todo
+set(DATA_FILE ${PROJECT_SOURCE_DIR}/README.md ${PROJECT_SOURCE_DIR}/todo.txt)
+
 #debug build
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
@@ -55,8 +58,6 @@ endif(NOT OPENCL_FOUND)
 # FIND GLUT
 #########################################################
 find_package(GLUT REQUIRED)
-
-message("**GLUT_INCLUDE_DIRS:" ${GLUT_INCLUDE_DIRS})
 include_directories(${GLUT_INCLUDE_DIRS})
 link_directories(${GLUT_LIBRARY_DIRS})
 add_definitions(${GLUT_DEFINITIONS})
@@ -105,12 +106,8 @@ file(GLOB SRC
 	src/base/*.cpp
 	src/glbackend/*.h
 	src/glbackend/*.cpp
-	src/raytracer_cpuonly.h
-	src/raytracer_cpuonly.cpp
-	src/sgnode.h
-	src/sgsphere.h
-	src/sgsphere.cpp
-	src/main.cpp
+        src/*.h
+        src/*.cpp
 	)
 
 ###############################

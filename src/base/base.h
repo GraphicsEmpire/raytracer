@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MATHHELPER_H
 #define MATHHELPER_H
 
@@ -137,6 +136,12 @@ inline void Clamp(T &v, T minVal, T maxVal)
         v = minVal;
     else if(v > maxVal)
         v = maxVal;
+}
+
+template <class T>
+inline void Saturate(T &v)
+{
+    Clamp<T>(v, 0.0, 1.0);
 }
 
 inline bool FLOAT_EQ(float x, float v)
