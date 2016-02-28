@@ -28,35 +28,38 @@ using namespace ps::opengl;
 namespace ps {
 namespace raytracer {
 
+class LightSource {
+
+};
 
 class RayTracer {
 public:
-	RayTracer();
-	RayTracer(int nx, int ny, int super_samples = 1);
-	virtual ~RayTracer();
+    RayTracer();
+    RayTracer(int nx, int ny, int super_samples = 1);
+    virtual ~RayTracer();
 
-	void setup(int nx, int ny, int supersamples = 1);
+    void setup(int nx, int ny, int supersamples = 1);
 
-	bool run();
+    bool run();
 
-	//return framebuffer
-	GLTexture& framebuffer() { return m_gltex;}
-        
-        int add_node(SGNode* pnode) { 
-            m_vnodes.push_back(pnode);
-            return ((int)m_vnodes.size() - 1);
-        }
-        
+    //return framebuffer
+    GLTexture& framebuffer() { return m_gltex;}
+
+    int add_node(SGNode* pnode) {
+        m_vnodes.push_back(pnode);
+        return ((int)m_vnodes.size() - 1);
+    }
+
 protected:
     void cleanup();
 
 protected:
-	int m_nx;
-	int m_ny;
-	int m_supersamps;
+    int m_nx;
+    int m_ny;
+    int m_supersamps;
 
-	vector<SGNode*> m_vnodes;
-	GLTexture m_gltex;
+    vector<SGNode*> m_vnodes;
+    GLTexture m_gltex;
 };
 
 

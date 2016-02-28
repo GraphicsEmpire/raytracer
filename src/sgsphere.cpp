@@ -14,11 +14,11 @@ namespace scene {
 
 SGSphere::SGSphere(): m_center(0,0,0), m_radius(1.0f) {
 	// TODO Auto-generated constructor stub
-    
+    compute_aabb();
 }
 
 SGSphere::SGSphere(const vec3f& center, float radius): m_center(center), m_radius(radius) {
-    
+    compute_aabb();
 }
 
 SGSphere::~SGSphere() {
@@ -33,6 +33,10 @@ void SGSphere::compute_aabb() {
 
 int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     
+    RangeF hitrange_aabb;
+    if(!m_aabb.intersect(r, interval, hitrange_aabb))
+        return 0;
+
     //A = d.d
     //B = 2d.(e-c)
     //C = (e-c).(e-c) - R2
@@ -42,12 +46,14 @@ int SGSphere::hit(const Ray& r, RangeF interval, HitRecord& hitrec) {
     float b = 2.0f * vec3f::dot(r.direction, e_min_c);
     float c = vec3f::dot(e_min_c, e_min_c) - m_radius * m_radius;
     
+    //solve quadratic equation
     float discriminant = b * b - 4.0f * a * c;
-    
 
+    //if negative there will be no roots!
     if(discriminant < 0.0f)
         return 0;
 
+    //roots
     float ds = sqrt(discriminant);
     float t1 = (-1.0f * b + ds) / (2.0f * a);
     float t2 = (-1.0f * b - ds) / (2.0f * a);

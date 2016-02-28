@@ -22,51 +22,51 @@ ps::raytracer::RayTracer* g_prt = NULL;
 
 
 void draw() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-	//draw a textured rectangle to display the result
-	float vertices [4][3] = { {-1.0, -1.0, 0.0}, {1.0, -1.0, 0.0},
-						  {1.0, 1.0, 0.0}, {-1.0, 1.0, 0.0} };
+    //draw a textured rectangle to display the result
+    float vertices [4][3] = { {-1.0, -1.0, 0.0}, {1.0, -1.0, 0.0},
+                              {1.0, 1.0, 0.0}, {-1.0, 1.0, 0.0} };
 
-	float texcoords [4][2] = { {0.0, 0.0}, {1.0, 0.0},
-						  {1.0, 1.0}, {0.0, 1.0} };
+    float texcoords [4][2] = { {0.0, 0.0}, {1.0, 0.0},
+                               {1.0, 1.0}, {0.0, 1.0} };
 
-	//binds rt frame
-	if(g_prt)
-		g_prt->framebuffer().bind();
-
-
-	glPushMatrix();
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
-	glBegin(GL_QUADS);
-		glTexCoord2fv(&texcoords[0][0]);
-		glVertex3fv(&vertices[0][0]);
+    //binds rt frame
+    if(g_prt)
+        g_prt->framebuffer().bind();
 
 
-		glTexCoord2fv(&texcoords[1][0]);
-		glVertex3fv(&vertices[1][0]);
+    glPushMatrix();
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glBegin(GL_QUADS);
+    glTexCoord2fv(&texcoords[0][0]);
+    glVertex3fv(&vertices[0][0]);
 
 
-		glTexCoord2fv(&texcoords[2][0]);
-		glVertex3fv(&vertices[2][0]);
+    glTexCoord2fv(&texcoords[1][0]);
+    glVertex3fv(&vertices[1][0]);
 
 
-		glTexCoord2fv(&texcoords[3][0]);
-		glVertex3fv(&vertices[3][0]);
-	glEnd();
+    glTexCoord2fv(&texcoords[2][0]);
+    glVertex3fv(&vertices[2][0]);
 
-	//unbinds ray tracer frame
-	if(g_prt)
-		g_prt->framebuffer().unbind();
 
-	glPopAttrib();
-	glPopMatrix();
+    glTexCoord2fv(&texcoords[3][0]);
+    glVertex3fv(&vertices[3][0]);
+    glEnd();
 
-	glutSwapBuffers();
+    //unbinds ray tracer frame
+    if(g_prt)
+        g_prt->framebuffer().unbind();
+
+    glPopAttrib();
+    glPopMatrix();
+
+    glutSwapBuffers();
 }
 
 void mouse_press(int button, int state, int x, int y) {
@@ -82,124 +82,142 @@ void time_step() {
 }
 
 void close() {
-	SAFE_DELETE(g_prt);
+    SAFE_DELETE(g_prt);
 
 }
 
 void def_resize(int w, int h) {
     glViewport(0, 0, w, h);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	//gluPerspective(FOVY, (double)w/(double)h, ZNEAR, ZFAR);
-	glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    //gluPerspective(FOVY, (double)w/(double)h, ZNEAR, ZFAR);
+    glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 
 void def_initgl() {
-	//Setup Shading Environment
-	static const GLfloat lightColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	static const GLfloat lightPos[4] = { 0.0f, 9.0f, 0.0f, 1.0f };
+    //Setup Shading Environment
+    static const GLfloat lightColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    static const GLfloat lightPos[4] = { 0.0f, 9.0f, 0.0f, 1.0f };
 
-	//Setup Light0 Position and Color
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightColor);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor);
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+    //Setup Light0 Position and Color
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightColor);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
-	//Turn on Light 0
-	//glEnable(GL_LIGHT0);
-	//Enable Lighting
-	//glEnable(GL_LIGHTING);
+    //Turn on Light 0
+    //glEnable(GL_LIGHT0);
+    //Enable Lighting
+    //glEnable(GL_LIGHTING);
 
-	//Enable features we want to use from OpenGL
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_POLYGON_SMOOTH);
-	glEnable(GL_LINE_SMOOTH);
+    //Enable features we want to use from OpenGL
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_POLYGON_SMOOTH);
+    glEnable(GL_LINE_SMOOTH);
 
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_STENCIL_TEST);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-	//glClearColor(0.45f, 0.45f, 0.45f, 1.0f);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+    //glClearColor(0.45f, 0.45f, 0.45f, 1.0f);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
 
-	//Compiling shaders
-//	GLenum err = glewInit();
-//	if (err != GLEW_OK)
-//	{
-//		//Problem: glewInit failed, something is seriously wrong.
-//		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-//		exit(1);
-//	}
+    //Compiling shaders
+    //	GLenum err = glewInit();
+    //	if (err != GLEW_OK)
+    //	{
+    //		//Problem: glewInit failed, something is seriously wrong.
+    //		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    //		exit(1);
+    //	}
 }
 
 void onkey(unsigned char key, int x, int y) {
-	switch(key) {
+    switch(key) {
+    case('r'): {
+        vloginfo("start raytracer");
+        g_prt->run();
+        vloginfo("finish raytracer");
+
+        break;
+    }
+
+    case(27): {
+        vloginfo("closing...");
+
+#ifdef PS_OS_MAC
+        close();
+        exit(0);
+#else
+        glutLeaveMainLoop();
+#endif
+    }
+        break;
+    }
+}
 
 
-	case(27): {
-		vloginfo("closing...");
+void onfunckey(int key, int x, int y) {
+    switch(key) {
+    case(GLUT_KEY_F5):
 
-		#ifdef PS_OS_MAC
-			close();
-			exit(0);
-		#else
-				glutLeaveMainLoop();
-		#endif
-	}
-	break;
-	}
+        vloginfo("start raytracer");
+        g_prt->run();
+        vloginfo("finish raytracer");
+
+        break;
+    }
 }
 
 int main(int argc, char* argv[]) {
-	vloginfo("Starting raytracer.");
+    vloginfo("Starting raytracer.");
 
-	CmdLineParser parser;
-	parser.parse(argc, argv);
+    CmdLineParser parser;
+    parser.parse(argc, argv);
 
 
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL);
-	glutInitWindowSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	glutCreateWindow("Raytracer");
-	glutDisplayFunc(draw);
-	glutReshapeFunc(def_resize);
-	glutKeyboardFunc(onkey);
-	glutMouseFunc(mouse_press);
-	glutMotionFunc(mouse_move);
-	//glutMouseWheelFunc(MouseWheel);
-	//glutSpecialFunc(SpecialKey);
-	//glutPassiveMotionFunc(MousePassiveMove);
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL);
+    glutInitWindowSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    glutCreateWindow("Raytracer");
+    glutDisplayFunc(draw);
+    glutReshapeFunc(def_resize);
+    glutKeyboardFunc(onkey);
+    glutSpecialFunc(onfunckey);
+    glutMouseFunc(mouse_press);
+    glutMotionFunc(mouse_move);
+    //glutMouseWheelFunc(MouseWheel);
+    //glutSpecialFunc(SpecialKey);
+    //glutPassiveMotionFunc(MousePassiveMove);
 
 #ifdef PS_OS_MAC
-	glutWMCloseFunc(close);
+    glutWMCloseFunc(close);
 #else
-	glutCloseFunc(close);
+    glutCloseFunc(close);
 #endif
 
+    glutIdleFunc(time_step);
 
-	glutIdleFunc(time_step);
+    //init gl
+    def_initgl();
 
+    //run the raytracer
+    g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
 
-	//init gl
-	def_initgl();
+    //add sphere
+    SGSphere* sp = new SGSphere(vec3f(0, 0, 20), 0.04f);
+    g_prt->add_node(sp);
 
-	//run the raytracer
-	g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
+    //g_prt->run();
 
-        //add sphere
-        SGSphere* sp = new SGSphere(vec3f(0.0f), 0.001f);
-        g_prt->add_node(sp);
+    glutMainLoop();
 
-	g_prt->run();
-
-	glutMainLoop();
-
-	return 0;
+    return 0;
 }
