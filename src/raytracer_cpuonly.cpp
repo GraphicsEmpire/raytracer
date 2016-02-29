@@ -112,12 +112,12 @@ Color RayTracer::phong_shading(const HitRecord& hitrec) {
 
         vec4f amb = vec4f::mul(hitrec.material.Ka, m_vlights[k].color);
         vec4f dif = vec4f::mul(hitrec.material.Kd, m_vlights[k].color) * cosDiff;
-        ///vec4f spec = vec4f::mul(hitrec.material.Ks, m_vlights[k].color) * pow(cosSpec, hitrec.material.shininess);
+        vec4f spec = vec4f::mul(hitrec.material.Ks, m_vlights[k].color) * pow(cosSpec, hitrec.material.shininess);
 
 //        vec4f cofactor = (hitrec.material.Kd + hitrec.material.Ks * pow(cosTheta, hitrec.material.shininess));
 //        vec4f phong = vec4f::mul(cofactor, m_vlights[k].color) * cosAlpha;
 
-        color = color + amb + dif;
+        color = color + amb + dif + spec;
     }
 
    // return Color::blue();

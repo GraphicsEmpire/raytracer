@@ -31,8 +31,8 @@ Material Material::red() {
     Material m;
     m.Ka = vec4f(0.1, 0.1, 0.1, 0.1);
     m.Kd = vec4f(0.8, 0, 0, 0);
-    m.Ks = vec4f(1, 1, 1, 1);
-    m.shininess = 80.0f;
+    m.Ks = vec4f(1.0, 0, 0, 0);
+    m.shininess = 8.0f;
 
     return m;
 }
