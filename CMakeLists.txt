@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 #project name
 project(raytracer_host.exe)
 
+#adding yaml
+add_subdirectory(src/3rdparty/yaml-cpp/)
+
 #add readme and todo
 set(DATA_FILE ${PROJECT_SOURCE_DIR}/README.md ${PROJECT_SOURCE_DIR}/todo.txt)
 
@@ -17,23 +20,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 MESSAGE( STATUS "CMAKE_CURRENT_SOURCE_DIR: " ${CMAKE_CURRENT_SOURCE_DIR} )
 
 ##parent dir
-##get_filename_component(PARENT_DIR ${CMAKE_CURRENT_SOURCE_DIR} PATH)
-##get_filename_component(PARENT_DIR ${PARENT_DIR} PATH)
 set(PARENT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 MESSAGE( STATUS "PARENT_DIR: " ${PARENT_DIR})
 
-##common
-#set(GAUNTLET_COMMON_SRC ${GAUNTLET_COMMON_SRC} "${PARENT_DIR}/common/")
-#MESSAGE( STATUS "GAUNTLET_COMMON_SRC: " ${GAUNTLET_COMMON_SRC})
-
-##cmake
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PARENT_DIR}/cmake/")
-#set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} src/3rdparty/xirpower)
+
 
 #opencl path
-##set(XILINX_SDACCEL "/proj/xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/2015.4")
-#set(OpenCL_INCPATH ${XILINX_SDACCEL}/runtime/include/1_2/)
-#set(OpenCL_LIBPATH ${XILINX_SDACCEL}/runtime/lib/x86_64/)
 MESSAGE( STATUS "OpenCL_INCPATH=" ${OpenCL_INCPATH})
 MESSAGE( STATUS "OpenCL_LIBPATH=" ${OpenCL_LIBPATH})
 
@@ -127,6 +120,5 @@ endif()
 ###############################
 # Linking
 ###############################
-message(INFO "glut---- ${GLUT_LIBRARY}")
 add_executable(raytracer_host.exe ${SRC})
 target_link_libraries(raytracer_host.exe ${OPENCL_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
