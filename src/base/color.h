@@ -63,7 +63,7 @@ public:
 	static Color blue() { return Color(0, 0, 255);}
 	static Color grey() { return Color(128, 128, 128);}
 	static Color black() { return Color(0, 0, 0);}
-	static Color white() { return Color(255, 0, 0);}
+	static Color white() { return Color(255, 255, 255);}
 	static Color skin() { return Color(239, 208, 207);}
 private:
 	vec4f m_color;

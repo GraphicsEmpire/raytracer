@@ -34,6 +34,8 @@ public:
 
     //predefined materials
     static Material red();
+    static Material green();
+    static Material blue();
 public:
     vec4f Ka;
     vec4f Kd;
@@ -45,7 +47,16 @@ public:
  *	HitRecord is a storage for material properties and the surface geometry at the point of
  * intersection with a view ray.
  */
-struct HitRecord {
+class HitRecord {
+public:
+    HitRecord();
+    HitRecord(const HitRecord& rhs);
+    
+    void copyfrom(const HitRecord& rhs);
+    
+    //ops
+    HitRecord& operator=(const HitRecord& rhs);
+public:
     float t;
     vec3f p;
     vec3f n;

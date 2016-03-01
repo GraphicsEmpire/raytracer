@@ -31,6 +31,11 @@ namespace raytracer {
 struct LightSource {
     vec3f pos;
     vec4f color;
+    
+    LightSource& operator=(const LightSource& rhs) {
+        *this = rhs;
+        return *this;
+    }
 };
 
 class RayTracer {
@@ -59,7 +64,7 @@ public:
     //lights
     bool addlight(const vec3f& pos, const Color& color);
     void removelight(int idx);
-    LightSource& light(int idx);
+    bool light(int idx, LightSource& lout);
 public:
     static const int max_light_sources = 8;
 
@@ -80,7 +85,10 @@ protected:
     int m_supersamps;
 
     //cam pos
-    vec3f m_campos;
+    vec3f m_cam_pos;   
+    RangeF m_cam_horz_span;
+    RangeF m_cam_vert_span;
+    float m_cam_focal_length;
 
 
     //background color

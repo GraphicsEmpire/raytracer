@@ -180,6 +180,7 @@ int main(int argc, char* argv[]) {
     vloginfo("Starting raytracer.");
 
     CmdLineParser parser;
+    parser.addSwitch("--input", "-i", "input yml scene file", "");
     parser.parse(argc, argv);
 
 
@@ -212,10 +213,20 @@ int main(int argc, char* argv[]) {
     g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
 
     //add sphere
-    SGSphere* sp = new SGSphere(vec3f(0, 0, 20), 0.2f);
-    sp->set_material(Material::red());
-    g_prt->add_node(sp);
-    g_prt->addlight(vec3f(0, 10, 20), Color::white());
+    SGSphere* sp1 = new SGSphere(vec3f(0, -1.0, 6), 1.0f);
+    sp1->set_material(Material::red());
+    g_prt->add_node(sp1);
+    
+    SGSphere* sp2 = new SGSphere(vec3f(-1.0, 0, 6), 1.0f);
+    sp2->set_material(Material::blue());
+    g_prt->add_node(sp2);
+
+    SGSphere* sp3 = new SGSphere(vec3f(+1.0, 0, 6), 1.0f);
+    sp3->set_material(Material::green());
+    g_prt->add_node(sp3);
+
+    
+    g_prt->addlight(vec3f(0, 4, 4), Color::white());
 
     //g_prt->run();
 
