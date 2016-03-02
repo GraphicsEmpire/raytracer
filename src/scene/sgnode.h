@@ -12,6 +12,7 @@
 #include "base/interval.h"
 #include "base/color.h"
 #include "base/aabb.h"
+#include "sgtransform.h"
 
 using namespace ps::base;
 
@@ -56,6 +57,8 @@ public:
     
     //ops
     HitRecord& operator=(const HitRecord& rhs);
+
+
 public:
     float t;
     vec3f p;
@@ -64,7 +67,9 @@ public:
     Material material;
 };
 
-
+/*!
+ * \brief The SGNode class
+ */
 class SGNode {
 public:
     SGNode() {}
@@ -74,14 +79,24 @@ public:
     virtual AABB compute_aabb() = 0;
     virtual int hit(const Ray& r, RangeF interval, HitRecord& hitrec) = 0;
 
+    /*!
+     * \brief aabb is the axis-aligned bounding box for the model
+     * \return
+     */
     AABB aabb() const {return m_aabb;}
 
     //mtrl
     Material material() const {return m_mtrl;}
     void set_material(const Material& mtrl) {m_mtrl = mtrl;}
+
+    //transform
+    const SGTransform& ctransform() const { return m_transform;}
+    SGTransform& transform() { return m_transform;}
+
 protected:
     AABB m_aabb;
-    Material m_mtrl;
+    Material m_mtrl;    
+    SGTransform m_transform;
 };
 
 

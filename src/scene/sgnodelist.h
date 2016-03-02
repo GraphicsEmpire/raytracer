@@ -39,6 +39,9 @@ namespace ps {
         }
 
     protected:
+        void cleanup();
+
+    protected:
         vector<SGNode*> m_vnodes;
 
     };

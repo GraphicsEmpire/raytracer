@@ -22,8 +22,14 @@ SGNodeList::SGNodeList() {
 
 
 SGNodeList::~SGNodeList() {
+    cleanup();
 }
 
+void SGNodeList::cleanup() {
+    for(U32 i=0; i < m_vnodes.size(); i++) {
+        SAFE_DELETE(m_vnodes[i]);
+    }
+}
         
 AABB SGNodeList::compute_aabb() {
     if(m_vnodes.size() == 0)

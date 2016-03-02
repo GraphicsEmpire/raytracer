@@ -13,7 +13,7 @@
 #include "base/ray.h"
 #include "sgnode.h"
 #include "base/pixmap.h"
-#include "sgnode.h"
+#include "sgnodelist.h"
 #include "glbackend/gltexture.h"
 
 #define DEFAULT_WIDTH 512
@@ -38,6 +38,39 @@ struct LightSource {
     }
 };
 
+/*!
+ * \brief The RTCamera class represents a camera for RayTracer engine
+ */
+class RTCamera {
+public:
+    RTCamera();
+    RTCamera(const RTCamera& rhs);
+    virtual ~RTCamera();
+
+    void copyfrom(const RTCamera& rhs);
+
+    //setters
+    void set_pos(const vec3f& pos) { m_pos = pos;}
+    void set_hspan(const RangeF& hspan) { m_hspan = hspan;}
+    void set_vspan(const RangeF& vspan) { m_vspan = vspan;}
+    void set_focallength(float fl) { m_focal_length = fl; }
+
+    //getters
+    vec3f pos() const { return m_pos;}
+    RangeF hspan() const { return m_hspan;}
+    RangeF vspan() const { return m_vspan;}
+    float focallength() const { return m_focal_length;}
+
+protected:
+    vec3f m_pos;
+    RangeF m_hspan;
+    RangeF m_vspan;
+    float m_focal_length;
+};
+
+/*!
+ * \brief The RayTracer class
+ */
 class RayTracer {
 public:
     RayTracer();
@@ -55,16 +88,17 @@ public:
     //return framebuffer
     GLTexture& framebuffer() { return m_glframebuffer;}
 
-    int add_node(SGNode* pnode) {
-        m_vnodes.push_back(pnode);
-        return ((int)m_vnodes.size() - 1);
-    }
-
+    //camera
+    RTCamera& camera() { return m_camera;}
+    const RTCamera& const_camera() const { return m_camera;}
 
     //lights
     bool addlight(const vec3f& pos, const Color& color);
     void removelight(int idx);
     bool light(int idx, LightSource& lout);
+
+    void set_rootnode(SGNodeList* proot) { m_prootnode = proot;}
+
 public:
     static const int max_light_sources = 8;
 
@@ -84,18 +118,14 @@ protected:
     int m_ny;
     int m_supersamps;
 
-    //cam pos
-    vec3f m_cam_pos;   
-    RangeF m_cam_horz_span;
-    RangeF m_cam_vert_span;
-    float m_cam_focal_length;
-
+    //camera
+    RTCamera m_camera;
 
     //background color
     Color m_bgcolor;
 
-    //nodes
-    vector<SGNode*> m_vnodes;
+    //models
+    SGNodeList* m_prootnode;
 
     //lights
     vector<LightSource> m_vlights;

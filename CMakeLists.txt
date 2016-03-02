@@ -4,13 +4,17 @@ cmake_minimum_required(VERSION 2.8)
 #project name
 project(raytracer_host.exe)
 
-#adding yaml
+# add yaml-cpp library
 add_subdirectory(src/3rdparty/yaml-cpp/)
+
+# add glfw library
+##add_subdirectory(src/3rdparty/glfw-3.1.2/)
+
 
 #add readme and todo
 set(DATA_FILE ${PROJECT_SOURCE_DIR}/README.md ${PROJECT_SOURCE_DIR}/todo.txt)
 
-#debug build
+#enable debug build
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
@@ -25,19 +29,13 @@ MESSAGE( STATUS "PARENT_DIR: " ${PARENT_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PARENT_DIR}/cmake/")
 
-
+###############################
+# Find OpenCL
+###############################
 #opencl path
 MESSAGE( STATUS "OpenCL_INCPATH=" ${OpenCL_INCPATH})
 MESSAGE( STATUS "OpenCL_LIBPATH=" ${OpenCL_LIBPATH})
 
-###############################
-# add glfw
-###############################
-##add_subdirectory(src/3rdparty/glfw-3.1.2/)
-
-###############################
-# Find OpenCL
-###############################
 find_package(OpenCL REQUIRED)
 include_directories(${OPENCL_INCLUDE_DIRS})
 link_directories(${OPENCL_LIBRARY_DIRS})
@@ -82,35 +80,36 @@ endif()
 # Other include paths
 ###############################
 include_directories(src/
-					src/common/
-					src/base/
-					src/glbackend/
-					src/scene/
-					src/3rdparty/
-					src/3rdparty/lodepng/
-					)
+                    src/common/
+                    src/base/
+                    src/glbackend/
+                    src/scene/
+                    src/3rdparty/
+                    src/3rdparty/lodepng/
+                    src/3rdparty/yaml-cpp/include/
+                    )
 
 
 ###############################
 # Add source files
 ###############################
 file(GLOB SRC
-	src/common/xcl.h
-	src/common/xcl.cpp
-	src/common/cmdlineparser.h
-	src/common/cmdlineparser.cpp
-	src/common/logger.h
-	src/common/logger.cpp
-	src/common/simplebmp.h
-	src/common/simplebmp.cpp
-	src/3rdparty/lodepng/*.h
-	src/3rdparty/lodepng/*.cpp
-	src/base/*.h
-	src/base/*.cpp
-	src/glbackend/*.h
-	src/glbackend/*.cpp
-	src/scene/*.h
-	src/scene/*.cpp
+    src/common/xcl.h
+    src/common/xcl.cpp
+    src/common/cmdlineparser.h
+    src/common/cmdlineparser.cpp
+    src/common/logger.h
+    src/common/logger.cpp
+    src/common/simplebmp.h
+    src/common/simplebmp.cpp
+    src/3rdparty/lodepng/*.h
+    src/3rdparty/lodepng/*.cpp
+    src/base/*.h
+    src/base/*.cpp
+    src/glbackend/*.h
+    src/glbackend/*.cpp
+    src/scene/*.h
+    src/scene/*.cpp
     src/*.h
     src/*.cpp
 	)
@@ -133,4 +132,4 @@ endif()
 # Linking
 ###############################
 add_executable(raytracer_host.exe ${SRC})
-target_link_libraries(raytracer_host.exe ${OPENCL_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(raytracer_host.exe yaml-cpp ${OPENCL_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

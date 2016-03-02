@@ -16,6 +16,27 @@ using namespace ps::scene;
 namespace ps {
 namespace raytracer {
 
+RTCamera::RTCamera() {
+    m_pos = vec3f(0.0f, 0.0f, 0.0f);
+    m_hspan = RangeF(-2.0f, 2.0f);
+    m_vspan = RangeF(-2.0f, 2.0f);
+    m_focal_length = 5.0f;
+}
+
+RTCamera::RTCamera(const RTCamera& rhs) {
+    copyfrom(rhs);
+}
+
+RTCamera::~RTCamera() {}
+
+void RTCamera::copyfrom(const RTCamera& rhs) {
+    m_pos = rhs.m_pos;
+    m_hspan = rhs.m_hspan;
+    m_vspan = rhs.m_vspan;
+    m_focal_length = rhs.m_focal_length;
+}
+
+//////////////////////////////////////////////////////////
 RayTracer::RayTracer() {
     setup(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
 }
@@ -26,16 +47,13 @@ RayTracer::RayTracer(int nx, int ny, int super_samples) {
 
 void RayTracer::setup(int nx, int ny, int supersamples) {
 
+    m_prootnode = NULL;
     m_nx = nx;
     m_ny = ny;
     m_supersamps = supersamples;
 
     //other vars
     m_bgcolor = Color::grey();
-    m_cam_pos = vec3f(0.0f, 0.0f, 0.0f);
-    m_cam_horz_span = RangeF(-2.0f, 2.0f);
-    m_cam_vert_span = RangeF(-2.0f, 2.0f);
-    m_cam_focal_length = 5.0f;
 
     U32 id = GLTexture::create_checkerboard(m_nx, m_ny);
     vec3i dim(m_nx, m_ny, 4);
@@ -51,9 +69,6 @@ void RayTracer::cleanup() {
 
     m_glframebuffer.cleanup();
 
-    for(U32 i=0; i < m_vnodes.size(); i++) {
-        SAFE_DELETE(m_vnodes[i]);
-    }
 }
 
 bool RayTracer::addlight(const vec3f& pos, const Color& color) {
@@ -99,7 +114,7 @@ Color RayTracer::phong_shading(const HitRecord& hitrec) {
     lo = vec4f::mul(hitrec.material.Ka, vec4f(.2f));
 
     //evalute phong
-    vec3f v = (m_cam_pos - hitrec.p).normalized();
+    vec3f v = (m_camera.pos() - hitrec.p).normalized();
 
     //consider all light sources
     for(U32 k=0; k < m_vlights.size(); k++) {
@@ -134,9 +149,13 @@ Color RayTracer::phong_shading(const HitRecord& hitrec) {
 
 
 
-bool RayTracer::run() {
-    vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);
+bool RayTracer::run() {    
+    if(m_prootnode == NULL) {
+        vlogerror("root node is not set.");
+        return false;
+    }
 
+    vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);
 
     U32 total_primary_rays = m_nx * m_ny * m_supersamps;
 
@@ -148,41 +167,23 @@ bool RayTracer::run() {
     for(int x = 0; x < m_nx; x++) {
         for(int y = 0; y < m_ny; y++) {
 
-            float u = m_cam_horz_span.lower() + m_cam_horz_span.length() * (((float)x + 0.5f) / (float) m_nx);
-            float v = m_cam_vert_span.lower() + m_cam_vert_span.length() * (((float)y + 0.5f) / (float) m_ny);
+            float u = m_camera.hspan().lower() + m_camera.hspan().length() * (((float)x + 0.5f) / (float) m_nx);
+            float v = m_camera.vspan().lower() + m_camera.vspan().length() * (((float)y + 0.5f) / (float) m_ny);
 
-            vec3f end(u, v, m_cam_focal_length);
+            vec3f end(u, v, m_camera.focallength());
 
-            Ray r(m_cam_pos, end - m_cam_pos);
+            Ray r(m_camera.pos(), end - m_camera.pos());
             
             //final hit record
             HitRecord hitrec_final;
             
-
-            Color lo(0.0f);
-            float mint = FLT_MAX;
-            int ctIntersected = 0;
+            Color lo(0.0f);            
             
             //the range along the ray
             RangeF range(0.0f, FLT_MAX);
 
             //hit all nodes in the scene
-            for(int inode=0; inode < (int)m_vnodes.size(); inode++) {
-                HitRecord hitrec_current;
-                
-                int count = m_vnodes[inode]->hit(r, range, hitrec_current);
-                if(count > 0) {
-                    //apply shading equation
-                    if(hitrec_final.t < mint) {
-                        mint = hitrec_final.t;
-                        range.setUpper(mint);
-                        
-                        hitrec_final = hitrec_current;
-                    }
-                    ctIntersected++;
-                    break;
-                }
-            }
+            int ctIntersected = m_prootnode->hit(r, range, hitrec_final);
 
             //process color and translucency
             if(ctIntersected == 0)

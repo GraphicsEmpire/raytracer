@@ -5,6 +5,7 @@
 #include "sgraytracer_cpuonly.h"
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
+#include "scene/sgscenereader.h"
 #include "sgsphere.h"
 
 #define FOVY 45.0
@@ -19,7 +20,7 @@ using namespace ps::scene;
 
 //create raytracer
 ps::raytracer::RayTracer* g_prt = NULL;
-
+ps::scene::SGSceneReader* g_reader = NULL;
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -183,6 +184,8 @@ int main(int argc, char* argv[]) {
     parser.addSwitch("--input", "-i", "input yml scene file", "");
     parser.parse(argc, argv);
 
+    //scene reader
+    //g_reader = new SGSceneReader(parser.value("input"));
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL);
@@ -212,23 +215,24 @@ int main(int argc, char* argv[]) {
     //run the raytracer
     g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
 
+    //root node
+    SGNodeList root;
+
     //add sphere
     SGSphere* sp1 = new SGSphere(vec3f(0, -1.0, 6), 1.0f);
     sp1->set_material(Material::red());
-    g_prt->add_node(sp1);
+    root.add_node(sp1);
     
     SGSphere* sp2 = new SGSphere(vec3f(-1.0, 0, 6), 1.0f);
     sp2->set_material(Material::blue());
-    g_prt->add_node(sp2);
+    root.add_node(sp2);
 
     SGSphere* sp3 = new SGSphere(vec3f(+1.0, 0, 6), 1.0f);
     sp3->set_material(Material::green());
-    g_prt->add_node(sp3);
-
+    root.add_node(sp3);
     
+    g_prt->set_rootnode(&root);
     g_prt->addlight(vec3f(0, 4, 4), Color::white());
-
-    //g_prt->run();
 
     glutMainLoop();
 

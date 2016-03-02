@@ -1,4 +1,5 @@
 ## simple scene with a sphere in the middle
+
 material:
     - crimson:
         ambient: [1, 0, 0, 1]
