@@ -85,6 +85,7 @@ include_directories(src/
 					src/common/
 					src/base/
 					src/glbackend/
+					src/scene/
 					src/3rdparty/
 					src/3rdparty/lodepng/
 					)
@@ -108,8 +109,10 @@ file(GLOB SRC
 	src/base/*.cpp
 	src/glbackend/*.h
 	src/glbackend/*.cpp
-        src/*.h
-        src/*.cpp
+	src/scene/*.h
+	src/scene/*.cpp
+    src/*.h
+    src/*.cpp
 	)
 
 ###############################

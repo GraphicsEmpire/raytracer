@@ -10,9 +10,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/proj/picasso/pourya/repos/raytracer/src/main.cpp</file>
-            <file>file:/proj/picasso/pourya/repos/raytracer/src/raytracer_cpuonly.cpp</file>
-            <file>file:/proj/picasso/pourya/repos/raytracer/src/sgsphere.cpp</file>
+            <file>file:/proj/picasso/pourya/repos/raytracer/src/scene/sgsphere.h</file>
         </group>
     </open-files>
 </project-private>

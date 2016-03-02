@@ -20,7 +20,7 @@ namespace opengl {
 */
 
 
-#define INVALID_GLBUFFER ~0
+#define INVALID_GLBUFFER 0xFFFFFFFF
 
 
 //Memory Buffer Type

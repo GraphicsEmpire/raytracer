@@ -117,8 +117,6 @@
         </df>
         <df name="CMakeTmp">
         </df>
-        <df name="Progress">
-        </df>
         <df name="raytracer_host.exe.dir">
           <df name="src">
             <df name="3rdparty">
@@ -130,6 +128,8 @@
             <df name="common">
             </df>
             <df name="glbackend">
+            </df>
+            <df name="scene">
             </df>
           </df>
         </df>
@@ -720,13 +720,19 @@
           <in>gltexture.h</in>
           <in>gltypes.h</in>
         </df>
+        <df name="scene">
+          <in>sgnode.cpp</in>
+          <in>sgnode.h</in>
+          <in>sgnodelist.cpp</in>
+          <in>sgnodelist.h</in>
+          <in>sgraytracer_cpuonly.cpp</in>
+          <in>sgraytracer_cpuonly.h</in>
+          <in>sgscenereader.cpp</in>
+          <in>sgscenereader.h</in>
+          <in>sgsphere.cpp</in>
+          <in>sgsphere.h</in>
+        </df>
         <in>main.cpp</in>
-        <in>raytracer_cpuonly.cpp</in>
-        <in>raytracer_cpuonly.h</in>
-        <in>sgnode.cpp</in>
-        <in>sgnode.h</in>
-        <in>sgsphere.cpp</in>
-        <in>sgsphere.h</in>
       </df>
     </df>
   </logicalFolder>
@@ -755,6 +761,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>

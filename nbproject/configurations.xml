@@ -7,6 +7,74 @@
           <df name="lodepng">
             <in>lodepng.cpp</in>
           </df>
+          <df name="yaml-cpp">
+            <df name="src">
+              <df name="contrib">
+                <in>graphbuilder.cpp</in>
+                <in>graphbuilderadapter.cpp</in>
+              </df>
+              <in>binary.cpp</in>
+              <in>convert.cpp</in>
+              <in>directives.cpp</in>
+              <in>emit.cpp</in>
+              <in>emitfromevents.cpp</in>
+              <in>emitter.cpp</in>
+              <in>emitterstate.cpp</in>
+              <in>emitterutils.cpp</in>
+              <in>exp.cpp</in>
+              <in>memory.cpp</in>
+              <in>node.cpp</in>
+              <in>node_data.cpp</in>
+              <in>nodebuilder.cpp</in>
+              <in>nodeevents.cpp</in>
+              <in>null.cpp</in>
+              <in>ostream_wrapper.cpp</in>
+              <in>parse.cpp</in>
+              <in>parser.cpp</in>
+              <in>regex_yaml.cpp</in>
+              <in>scanner.cpp</in>
+              <in>scanscalar.cpp</in>
+              <in>scantag.cpp</in>
+              <in>scantoken.cpp</in>
+              <in>simplekey.cpp</in>
+              <in>singledocparser.cpp</in>
+              <in>stream.cpp</in>
+              <in>tag.cpp</in>
+            </df>
+            <df name="test">
+              <df name="gmock-1.7.0">
+                <df name="gtest">
+                  <df name="src">
+                    <in>gtest-all.cc</in>
+                    <in>gtest_main.cc</in>
+                  </df>
+                </df>
+                <df name="src">
+                  <in>gmock-all.cc</in>
+                  <in>gmock_main.cc</in>
+                </df>
+              </df>
+              <df name="integration">
+                <in>emitter_test.cpp</in>
+                <in>encoding_test.cpp</in>
+                <in>gen_emitter_test.cpp</in>
+                <in>handler_spec_test.cpp</in>
+                <in>handler_test.cpp</in>
+                <in>load_node_test.cpp</in>
+                <in>node_spec_test.cpp</in>
+              </df>
+              <df name="node">
+                <in>node_test.cpp</in>
+              </df>
+              <in>main.cpp</in>
+              <in>ostream_wrapper_test.cpp</in>
+            </df>
+            <df name="util">
+              <in>parse.cpp</in>
+              <in>read.cpp</in>
+              <in>sandbox.cpp</in>
+            </df>
+          </df>
         </df>
         <df name="base">
           <in>aabb.cpp</in>
@@ -25,10 +93,14 @@
           <in>glbindable.cpp</in>
           <in>gltexture.cpp</in>
         </df>
+        <df name="scene">
+          <in>sgnode.cpp</in>
+          <in>sgnodelist.cpp</in>
+          <in>sgraytracer_cpuonly.cpp</in>
+          <in>sgscenereader.cpp</in>
+          <in>sgsphere.cpp</in>
+        </df>
         <in>main.cpp</in>
-        <in>raytracer_cpuonly.cpp</in>
-        <in>sgnode.cpp</in>
-        <in>sgsphere.cpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -53,8 +125,10 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <flagsDictionary>
-        <element flagsID="0" commonFlags="-fopenmp -std=c++11"/>
-        <element flagsID="1"
+        <element flagsID="0" commonFlags="-O2"/>
+        <element flagsID="1" commonFlags="-O2 -std=c++11"/>
+        <element flagsID="2" commonFlags="-O2 -std=c++11 -std=c++11"/>
+        <element flagsID="3"
                  commonFlags="-mtune=generic -march=x86-64 -std=c++11 -fopenmp"/>
       </flagsDictionary>
       <codeAssistance>
@@ -103,12 +177,389 @@
           </preprocessorList>
         </ccTool>
       </folder>
+      <folder path="0/src/3rdparty/yaml-cpp">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/src</pElem>
+            <pElem>src/3rdparty/yaml-cpp/include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/src/3rdparty/yaml-cpp/src">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/src/3rdparty/yaml-cpp/test/gmock-1.7.0">
+        <ccTool>
+          <preprocessorList>
+            <Elem>GTEST_HAS_PTHREAD=1</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="0/src/3rdparty/yaml-cpp/test/gmock-1.7.0/src">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/src/3rdparty/yaml-cpp/test/integration">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/src/3rdparty/yaml-cpp/test/node">
+        <ccTool>
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <item path="src/3rdparty/lodepng/lodepng.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="3">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/binary.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/contrib/graphbuilder.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/contrib/graphbuilderadapter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/convert.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/directives.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/emit.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/emitfromevents.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/emitter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/emitterstate.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/emitterutils.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/exp.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/memory.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/node.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/node_data.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/nodebuilder.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/nodeevents.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/null.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/ostream_wrapper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/parse.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/parser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/regex_yaml.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/scanner.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/scanscalar.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/scantag.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/scantoken.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/simplekey.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/singledocparser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/stream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/src/tag.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/src/gtest-all.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/src/gtest_main.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/gmock-1.7.0/src/gmock-all.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/gmock-1.7.0/src/gmock_main.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/emitter_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/encoding_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/gen_emitter_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/handler_spec_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/handler_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/load_node_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/integration/node_spec_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/node/node_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/test/ostream_wrapper_test.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="2">
+          <incDir>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/gtest/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test/gmock-1.7.0/include</pElem>
+            <pElem>src/3rdparty/yaml-cpp/test</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/util/parse.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/util/read.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/3rdparty/yaml-cpp/util/sandbox.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool flags="1">
         </ccTool>
       </item>
       <item path="src/base/aabb.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
             <pElem>src/base</pElem>
@@ -124,7 +575,7 @@
         </ccTool>
       </item>
       <item path="src/base/directory.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
@@ -139,7 +590,7 @@
         </ccTool>
       </item>
       <item path="src/base/matrix.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>src/base</pElem>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
@@ -154,21 +605,25 @@
         </ccTool>
       </item>
       <item path="src/base/pixmap.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
             <pElem>src/base</pElem>
-            <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
             <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src</pElem>
+            <pElem>src/3rdparty</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="src/base/str.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
             <pElem>src/base</pElem>
@@ -183,7 +638,7 @@
         </ccTool>
       </item>
       <item path="src/common/cmdlineparser.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
@@ -198,7 +653,7 @@
         </ccTool>
       </item>
       <item path="src/common/logger.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="1">
+        <ccTool flags="3">
           <incDir>
             <pElem>src/common</pElem>
             <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
@@ -212,7 +667,7 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/common/simplebmp.cpp" ex="false" tool="1" flavor2="4">
+      <item path="src/common/simplebmp.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <incDir>
             <pElem>src/common</pElem>
@@ -222,7 +677,7 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/common/xcl.cpp" ex="false" tool="1" flavor2="4">
+      <item path="src/common/xcl.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <incDir>
             <pElem>/System/Library/Frameworks/OpenCL.framework/Headers</pElem>
@@ -234,7 +689,7 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/glbackend/glbindable.cpp" ex="false" tool="1" flavor2="4">
+      <item path="src/glbackend/glbindable.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <incDir>
             <pElem>src/glbackend</pElem>
@@ -243,71 +698,114 @@
         </ccTool>
       </item>
       <item path="src/glbackend/gltexture.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
             <pElem>src/base</pElem>
             <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>/usr/include/GL</pElem>
+            <pElem>src/common</pElem>
             <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src</pElem>
+            <pElem>src/3rdparty</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
             <pElem>src/base</pElem>
+            <pElem>src/scene</pElem>
+            <pElem>src</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>src/common</pElem>
             <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
-            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
-      <item path="src/raytracer_cpuonly.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+      <item path="src/scene/sgnode.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
+            <pElem>src/scene</pElem>
             <pElem>src/base</pElem>
-            <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
-            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
+            <pElem>src</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
-      <item path="src/sgnode.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+      <item path="src/scene/sgnodelist.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
             <pElem>src/base</pElem>
-            <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
-            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src/scene</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>src</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
-      <item path="src/sgsphere.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+      <item path="src/scene/sgraytracer_cpuonly.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="3">
           <incDir>
-            <pElem>../../../../xbuilds/2015.4_sdaccel_daily_latest/installs/lin64/SDAccel/HEAD/runtime/include/1_2</pElem>
-            <pElem>src</pElem>
-            <pElem>src/common</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
             <pElem>src/base</pElem>
+            <pElem>src/scene</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>src/common</pElem>
             <pElem>src/glbackend</pElem>
-            <pElem>src/3rdparty</pElem>
-            <pElem>src/3rdparty/lodepng</pElem>
+            <pElem>src</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/scene/sgscenereader.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/scene/sgsphere.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="3">
+          <incDir>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2</pElem>
+            <pElem>src/base</pElem>
+            <pElem>src/scene</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux/bits</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/debug</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/ext</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include</pElem>
+            <pElem>src/common</pElem>
+            <pElem>/opt/rh/devtoolset-2/root/usr/include/c++/4.8.2/x86_64-redhat-linux</pElem>
+            <pElem>src</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>

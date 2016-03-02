@@ -1,5 +1,5 @@
 
-# support for sphere
+DONE # support for sphere
 # support for triangle
 # support for triangle-mesh
 # support for camera

@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "glbackend/glselect.h"
-#include "raytracer_cpuonly.h"
+#include "sgraytracer_cpuonly.h"
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
 #include "sgsphere.h"
