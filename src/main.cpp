@@ -1,6 +1,7 @@
 
 #include <iostream>
 
+#include "base/directory.h"
 #include "glbackend/glselect.h"
 #include "sgraytracer_cpuonly.h"
 #include "common/logger.h"
@@ -15,6 +16,7 @@
 using namespace std;
 using namespace sda;
 using namespace sda::utils;
+using namespace ps::dir;
 using namespace ps::raytracer;
 using namespace ps::scene;
 
@@ -184,12 +186,21 @@ int main(int argc, char* argv[]) {
     parser.addSwitch("--input", "-i", "input yml scene file", "");
     parser.parse(argc, argv);
 
+    string strFP = parser.value("input");
+    vloginfo("input scene: %s", strFP.c_str());
+
+    if(!ps::dir::FileExists(AnsiStr(strFP.c_str()))) {
+        vlogerror("input file does not exist");
+        exit(1);
+    }
+
     //scene reader
-    //g_reader = new SGSceneReader(parser.value("input"));
+    g_reader = new SGSceneReader(strFP);
+
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL);
-    glutInitWindowSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    glutInitWindowSize(g_reader->settings().screen_dim.x, g_reader->settings().screen_dim.y);
     glutCreateWindow("Raytracer");
     glutDisplayFunc(draw);
     glutReshapeFunc(def_resize);

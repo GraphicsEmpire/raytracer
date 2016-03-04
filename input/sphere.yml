@@ -1,4 +1,6 @@
 ## simple scene with a sphere in the middle
+screen_dim: [800, 600]
+render_type: "raytrace"
 
 material:
     - crimson:
