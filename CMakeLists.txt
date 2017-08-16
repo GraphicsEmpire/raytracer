@@ -29,21 +29,6 @@ MESSAGE( STATUS "PARENT_DIR: " ${PARENT_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PARENT_DIR}/cmake/")
 
-###############################
-# Find OpenCL
-###############################
-#opencl path
-MESSAGE( STATUS "OpenCL_INCPATH=" ${OpenCL_INCPATH})
-MESSAGE( STATUS "OpenCL_LIBPATH=" ${OpenCL_LIBPATH})
-
-find_package(OpenCL REQUIRED)
-include_directories(${OPENCL_INCLUDE_DIRS})
-link_directories(${OPENCL_LIBRARY_DIRS})
-add_definitions(${OPENCL_DEFINITIONS})
-if(NOT OPENCL_FOUND)
-	message(ERROR " OPENCL not found!")
-endif(NOT OPENCL_FOUND)
-
 
 #########################################################
 # FIND GLUT

@@ -1,58 +1,72 @@
 #!/bin/bash
 
-checkabortfailed() 
+checkabortfailed()
 {
-	if [ $1 -eq 0 ]
-	then
-	  echo "INFO: Step finished successfully"
-	else
-	  echo "ERROR: An error occurred. aborting..."
-	  exit 1
-	fi
+    if [ $1 -eq 0 ]
+    then
+      echo "INFO: Step finished successfully"
+    else
+      echo "ERROR: An error occurred. aborting..."
+      exit 1
+    fi
 }
 
 get_cur_dir() {
-	SOURCE="${BASH_SOURCE[0]}"
-	
-	# resolve $SOURCE until the file is no longer a symlink
-	while [ -h "$SOURCE" ]; do 
-	  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-	  SOURCE="$(readlink "$SOURCE")"
-	  # if $SOURCE was a relative symlink, we need to resolve it relative to 
-	  # the path where the symlink file was located
-	  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" 
-	done
-	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="${BASH_SOURCE[0]}"
+
+    # resolve $SOURCE until the file is no longer a symlink
+    while [ -h "$SOURCE" ]; do
+      DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+      SOURCE="$(readlink "$SOURCE")"
+      # if $SOURCE was a relative symlink, we need to resolve it relative to
+      # the path where the symlink file was located
+      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+    done
+    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 }
 
+get_cur_dir
 
-if [ -z "$SDACCEL_ROOT" ]
+
+export TARGET_OS=`uname -s`
+
+echo "Remove old builds"
+rm -rf $DIR/build
+
+mkdir $DIR/build
+#######################################################################
+if [ "${TARGET_OS}" == "Linux" ] || [ "${TARGET_OS}" == "Darwin" ]
 then
-	echo "WARNING: SDACCEL_ROOT is not defined. I will use which to find it."
-	export SDACCEL_ROOT=`which sdaccel`
-	checkabortfailed $?
+  #TODO: install the following needed tools
+  # xsltproc, lcov, doxygen
+  pushd $DIR/build
+  echo "INFO: Build for [${TARGET_OS}]"
+  cmake -DCMAKE_BUILD_TYPE=Debug ..
+  checkabortfailed $?
 
-	export SDACCEL_ROOT=$(dirname $SDACCEL_ROOT)
-	export SDACCEL_ROOT=$(dirname $SDACCEL_ROOT)
-	echo "INFO: detected SDAccel root at ${SDACCEL_ROOT}" 
+  echo "INFO: Count number of CPU cores on this machine"
+  CPU_CORES_COUNT=`grep -c ^processor /proc/cpuinfo`
+  #CPU_CORES_COUNT=1
+  echo "INFO: There are [${CPU_CORES_COUNT}] processor cores in this machine"
+
+  echo "INFO: Build project"
+  make -j${CPU_CORES_COUNT}
+  checkabortfailed $?
+
+  
+  popd
+else
+  pushd $DIR/build
+  CPU_CORES_COUNT=${NUMBER_OF_PROCESSORS}
+
+  echo "Build for ${TARGET_OS}"
+  cmake -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 14 2015 Win64" ..
+  checkabortfailed $?
+
+  echo "Add MSBuild to path"
+  export PATH="C:\Program Files (x86)\MSBuild\14.0\Bin":$PATH
+  MSBuild.exe *.sln /maxcpucount:${CPU_CORES_COUNT}
+  checkabortfailed $?
+
+  popd
 fi
-
-export RUNTIME_LIB_DIR="x86_64"
-echo "INFO: SDACCEL_ROOT=${SDACCEL_ROOT}"
-echo "INFO: RUNTIME_LIB_DIR=${RUNTIME_LIB_DIR}"
-
-export SDACCEL_RUNTIME="${SDACCEL_ROOT}/runtime/"
-export OpenCL_INCPATH="${SDACCEL_RUNTIME}/include/1_2/"
-export OpenCL_LIBPATH="${SDACCEL_RUNTIME}/lib/${RUNTIME_LIB_DIR}"
-
-echo "INFO: SDACCEL_RUNTIME=${SDACCEL_RUNTIME}"
-echo "INFO: OpenCL_INCPATH=${OpenCL_INCPATH}"
-echo "INFO: OpenCL_LIBPATH=${OpenCL_LIBPATH}"
-
-##mkdir -p bin
-##pushd bin
-
-cmake -DOpenCL_INCPATH="${OpenCL_INCPATH}" -DOpenCL_LIBPATH="${OpenCL_LIBPATH}" .
-make
-
-##popd
