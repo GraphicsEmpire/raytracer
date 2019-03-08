@@ -170,8 +170,16 @@ void onfunckey(int key, int x, int y) {
   }
 }
 
-void benchmark() {
-  vloginfo("start benchmark");
+void benchmark() {  
+  if(g_prt == nullptr) {
+    return;
+  }
+
+  printf("---------------------------------------\n");
+  uint64_t total_primary_rays = g_prt->frame_width() * g_prt->frame_height();
+  printf("resolution = [%d x %d]\n", g_prt->frame_width(), g_prt->frame_height());
+  printf("total primary rays = %lu\n", total_primary_rays);
+  printf("---------------------------------------\n");
 
   const int nruns = 10;
   uint64_t average_time = 0;
@@ -179,12 +187,12 @@ void benchmark() {
     g_prt->run();
     average_time += g_prt->get_duration_microseconds();
     std::cout << "run [ " << i + 1 << " of " << nruns << " ] duration = " << g_prt->get_duration_microseconds() << " microseconds" << std::endl; 
-  }
-
-  std::cout << "Average of [" << nruns << "] duration = [" << average_time / nruns << "] micro-seconds" << std::endl;
-
-  vloginfo("finish benchmark");
+  }  
+  
+  printf("total runs = [%d], avg duration = [%lu] microseconds\n", nruns, average_time / nruns);
+  printf("---------------------------------------\n");
 }
+
 int main(int argc, char* argv[]) {
     vloginfo("Starting raytracer.");
 

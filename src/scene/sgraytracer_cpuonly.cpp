@@ -155,11 +155,7 @@ bool RayTracer::run() {
         vlogerror("root node is not set.");
         return false;
     }
-
-    vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);
-
-    U64 total_primary_rays = m_nx * m_ny * m_supersamps;
-
+    
     Pixmap pix(m_nx, m_ny);
     
     //parallel using openmp    
@@ -201,10 +197,6 @@ bool RayTracer::run() {
 
     std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
     m_duration_micro_seconds = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    
-    vloginfo("resolution = [%lu x %lu]", m_nx, m_ny);
-    vloginfo("duration = %llu microseconds", m_duration_micro_seconds);
-    vloginfo("total primary rays = %llu", total_primary_rays);
 
     //update the texture
     m_glframebuffer.set(pix);

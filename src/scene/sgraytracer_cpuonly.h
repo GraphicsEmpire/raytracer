@@ -104,6 +104,15 @@ public:
     uint64_t get_duration_microseconds() const {
       return m_duration_micro_seconds;
     }
+
+    int frame_width() const {
+      return m_nx;
+    }
+
+    int frame_height() const {
+      return m_ny;
+    }
+
 public:
     static const int max_light_sources = 8;
 
