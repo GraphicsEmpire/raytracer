@@ -1,11 +1,8 @@
 
 #include <iostream>
-
-#include "base/directory.h"
 #include "glbackend/glselect.h"
 #include "sgraytracer_cpuonly.h"
 #include "common/logger.h"
-#include "common/cmdlineparser.h"
 #include "sgsphere.h"
 
 #define FOVY 45.0
@@ -14,13 +11,13 @@
 
 using namespace std;
 using namespace sda;
-using namespace sda::utils;
-using namespace ps::dir;
 using namespace ps::raytracer;
 using namespace ps::scene;
 
 //create raytracer
 ps::raytracer::RayTracer* g_prt = NULL;
+
+void benchmark();
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -143,9 +140,9 @@ void def_initgl() {
 void onkey(unsigned char key, int x, int y) {
     switch(key) {
     case('r'): {
-        vloginfo("start raytracer");
+        vloginfo("oneshot");
         g_prt->run();
-        vloginfo("finish raytracer");
+        vloginfo("oneshot");
 
         break;
     }
@@ -168,14 +165,26 @@ void onkey(unsigned char key, int x, int y) {
 void onfunckey(int key, int x, int y) {
   switch(key) {
   case(GLUT_KEY_F5):
-    vloginfo("start raytracer");
-    g_prt->run();
-    vloginfo("finish raytracer");
-
+    benchmark();
     break;
   }
 }
 
+void benchmark() {
+  vloginfo("start benchmark");
+
+  const int nruns = 10;
+  uint64_t average_time = 0;
+  for(int i=0; i < nruns; i++) {
+    g_prt->run();
+    average_time += g_prt->get_duration_microseconds();
+    std::cout << "run [ " << i + 1 << " of " << nruns << " ] duration = " << g_prt->get_duration_microseconds() << " microseconds" << std::endl; 
+  }
+
+  std::cout << "Average of [" << nruns << "] duration = [" << average_time / nruns << "] micro-seconds" << std::endl;
+
+  vloginfo("finish benchmark");
+}
 int main(int argc, char* argv[]) {
     vloginfo("Starting raytracer.");
 
@@ -205,24 +214,33 @@ int main(int argc, char* argv[]) {
     def_initgl();
 
     //run the raytracer
-    g_prt = new RayTracer(RayTracer::kDefaultFrameWidth, RayTracer::kDefaultFrameHeight, 1);
+    //g_prt = new RayTracer(RayTracer::kDefaultFrameWidth, RayTracer::kDefaultFrameHeight, 1);
+    g_prt = new RayTracer(RayTracer::kFourKFrameWidth, RayTracer::kFourKFrameHeight, 1);
 
     //root node
     SGNodeList root;
+    std::vector<Material> mtrl_list = {Material::red(), Material::green(), Material::blue()};
 
-    //add sphere
-    SGSphere* sp1 = new SGSphere(vec3f(0, -1.0, 6), 1.0f);
-    sp1->set_material(Material::red());
-    root.add_node(sp1);
-    
-    SGSphere* sp2 = new SGSphere(vec3f(-1.0, 0, 6), 1.0f);
-    sp2->set_material(Material::blue());
-    root.add_node(sp2);
+    const int nsx = 20;
+    const int nsy = 20;
+    for(int i = 0; i < nsx; i++) {
+      for(int j = 0; j < nsy; j++) {
 
-    SGSphere* sp3 = new SGSphere(vec3f(+1.0, 0, 6), 1.0f);
-    sp3->set_material(Material::green());
-    root.add_node(sp3);
-    
+        int index = i * nsy + j;
+        int mtrl_index = index % mtrl_list.size();
+        
+        //define the radius 
+        float radius = RandRangeT<float>(0.1f, 0.5f);
+        float depth = RandRangeT<float>(5.0f, 20.0f);
+        float x = Lerp(static_cast<float>(i) / static_cast<float>(nsx), -2.0f, 2.0f);
+        float y = Lerp(static_cast<float>(j) / static_cast<float>(nsy), -2.0f, 2.0f);
+
+        //create the primitive 
+        SGSphere* sphere = new SGSphere(vec3f(x, y, depth), radius);
+        sphere->set_material(mtrl_list[mtrl_index]);
+        root.add_node(sphere);
+      }
+    }    
     g_prt->set_rootnode(&root);
     g_prt->addlight(vec3f(0, 4, 4), Color::white());
 

@@ -76,6 +76,8 @@ public:
 
     static const unsigned int kDefaultFrameWidth = 1200;
     static const unsigned int kDefaultFrameHeight = 800;
+    static const unsigned int kFourKFrameWidth = 3840;
+    static const unsigned int kFourKFrameHeight = 2160;
 
     void setup(int nx, int ny, int supersamples = 1);
 
@@ -99,6 +101,9 @@ public:
 
     void set_rootnode(SGNodeList* proot) { m_prootnode = proot;}
 
+    uint64_t get_duration_microseconds() const {
+      return m_duration_micro_seconds;
+    }
 public:
     static const int max_light_sources = 8;
 
@@ -132,6 +137,8 @@ protected:
 
     //output
     GLTexture m_glframebuffer;
+
+    uint64_t m_duration_micro_seconds;
 };
 
 

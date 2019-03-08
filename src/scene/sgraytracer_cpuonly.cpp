@@ -2,9 +2,10 @@
  * raytracer_cpuonly.cpp
  *
  *  Created on: Feb 16, 2016
- *      Author: pouryas
+ *      Author: pourya
  */
 
+#include <chrono>
 #include "base/base.h"
 #include "glbackend/glselect.h"
 #include "sgraytracer_cpuonly.h"
@@ -157,12 +158,13 @@ bool RayTracer::run() {
 
     vloginfo("Starting primary rays at resolution [%u x %u] SS= %u", m_nx, m_ny, m_supersamps);
 
-    U32 total_primary_rays = m_nx * m_ny * m_supersamps;
+    U64 total_primary_rays = m_nx * m_ny * m_supersamps;
 
     Pixmap pix(m_nx, m_ny);
-
     
-    //parallel using openmp
+    //parallel using openmp    
+    std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
     #pragma omp parallel for schedule(dynamic,1) collapse(2)
     for(int x = 0; x < m_nx; x++) {
         for(int y = 0; y < m_ny; y++) {
@@ -195,27 +197,18 @@ bool RayTracer::run() {
             //put pixel
             pix.putp(x, y, lo);
         }
-        
-//        U32 finished = x * m_ny;
-//        float ratio = (float) finished / (float) total_primary_rays;
-//        vloginfo("progress = %.2f", ratio * 100.0f);
     }
 
-    vloginfo("Finished all");
-    //update texture
+    std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+    m_duration_micro_seconds = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+    
+    vloginfo("resolution = [%lu x %lu]", m_nx, m_ny);
+    vloginfo("duration = %llu microseconds", m_duration_micro_seconds);
+    vloginfo("total primary rays = %llu", total_primary_rays);
+
+    //update the texture
     m_glframebuffer.set(pix);
     glutPostRedisplay();
-
-
-
-    //finalize image
-    pix.putp(0, 0, Color::green());
-    pix.putp(pix.width()-1, pix.height()-1, Color::red());
-    m_glframebuffer.set(pix);
-
-    glutPostRedisplay();
-
-
     return true;
 }
 
