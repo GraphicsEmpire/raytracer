@@ -38,7 +38,7 @@ void RTCamera::copyfrom(const RTCamera& rhs) {
 
 //////////////////////////////////////////////////////////
 RayTracer::RayTracer() {
-    setup(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
+    setup(kDefaultFrameWidth, kDefaultFrameHeight, 1);
 }
 
 RayTracer::RayTracer(int nx, int ny, int super_samples) {

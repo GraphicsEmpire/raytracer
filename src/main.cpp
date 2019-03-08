@@ -6,7 +6,6 @@
 #include "sgraytracer_cpuonly.h"
 #include "common/logger.h"
 #include "common/cmdlineparser.h"
-#include "scene/sgscenereader.h"
 #include "sgsphere.h"
 
 #define FOVY 45.0
@@ -22,7 +21,6 @@ using namespace ps::scene;
 
 //create raytracer
 ps::raytracer::RayTracer* g_prt = NULL;
-ps::scene::SGSceneReader* g_reader = NULL;
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -168,39 +166,22 @@ void onkey(unsigned char key, int x, int y) {
 
 
 void onfunckey(int key, int x, int y) {
-    switch(key) {
-    case(GLUT_KEY_F5):
+  switch(key) {
+  case(GLUT_KEY_F5):
+    vloginfo("start raytracer");
+    g_prt->run();
+    vloginfo("finish raytracer");
 
-        vloginfo("start raytracer");
-        g_prt->run();
-        vloginfo("finish raytracer");
-
-        break;
-    }
+    break;
+  }
 }
 
 int main(int argc, char* argv[]) {
     vloginfo("Starting raytracer.");
 
-    CmdLineParser parser;
-    parser.addSwitch("--input", "-i", "input yml scene file", "");
-    parser.parse(argc, argv);
-
-    string strFP = parser.value("input");
-    vloginfo("input scene: %s", strFP.c_str());
-
-    if(!ps::dir::FileExists(AnsiStr(strFP.c_str()))) {
-        vlogerror("input file does not exist");
-        exit(1);
-    }
-
-    //scene reader
-    g_reader = new SGSceneReader(strFP);
-
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL);
-    glutInitWindowSize(g_reader->settings().screen_dim.x, g_reader->settings().screen_dim.y);
+    glutInitWindowSize(RayTracer::kDefaultFrameWidth, RayTracer::kDefaultFrameHeight);
     glutCreateWindow("Raytracer");
     glutDisplayFunc(draw);
     glutReshapeFunc(def_resize);
@@ -224,7 +205,7 @@ int main(int argc, char* argv[]) {
     def_initgl();
 
     //run the raytracer
-    g_prt = new RayTracer(DEFAULT_WIDTH, DEFAULT_HEIGHT, 1);
+    g_prt = new RayTracer(RayTracer::kDefaultFrameWidth, RayTracer::kDefaultFrameHeight, 1);
 
     //root node
     SGNodeList root;

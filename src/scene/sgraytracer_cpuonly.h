@@ -16,9 +16,6 @@
 #include "sgnodelist.h"
 #include "glbackend/gltexture.h"
 
-#define DEFAULT_WIDTH 512
-#define DEFAULT_HEIGHT 512
-
 using namespace std;
 using namespace ps::scene;
 using namespace ps::base;
@@ -76,6 +73,9 @@ public:
     RayTracer();
     RayTracer(int nx, int ny, int super_samples = 1);
     virtual ~RayTracer();
+
+    static const unsigned int kDefaultFrameWidth = 1200;
+    static const unsigned int kDefaultFrameHeight = 800;
 
     void setup(int nx, int ny, int supersamples = 1);
 
